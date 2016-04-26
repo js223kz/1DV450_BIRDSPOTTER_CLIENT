@@ -1,0 +1,26 @@
+{
+  "name": "birdspotter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js223kz/1DV450_BIRDSPOTTER_CLIENT.git"
+  },
+  "author": "Johanna Szepanski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/js223kz/1DV450_BIRDSPOTTER_CLIENT/issues"
+  },
+  "homepage": "https://github.com/js223kz/1DV450_BIRDSPOTTER_CLIENT#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "nodemon": "^1.9.1"
+  }
+}
