@@ -18,8 +18,10 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 // routes ======================================================================
 require('./routes.js')(app);
 
-require('dotenv').config()
-console.log(process.env.MY_API_KEY)
+require('dotenv').config();
+console.log(process.env.API_KEY);
+console.log(process.env.API_URL);
+
 
 // listen (start app with node server.js) ======================================
 server.listen(port);
