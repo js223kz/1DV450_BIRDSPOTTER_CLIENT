@@ -15,31 +15,34 @@ module.exports = function(app) {
         res.sendFile('./client/index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
     
+    // spots -------------------------------------------------------------
     app.get('/spots', (req, res) => {
       spots.getSpots().then((data) => {
-            console.log(data)
+            res.send(data);
             })
             .catch((err) => {
-                console.error(err)
+                res.send(err);
             });
         });
     
+    // birds -------------------------------------------------------------
     app.get('/birds', (req, res)=> {
       birds.getBirds().then((data) => {
-            console.log(data)
+            res.send(data);
             })
             .catch((err) => {
-                console.error(err)
+                res.send(err);
             });
         });
     
-    app.get('/authenticate/:auth', (req, res) =>{
+    // get token restricted actions -------------------------------------------------------------
+    app.post('/authenticate/:auth', (req, res) =>{
         let test = req.params.auth;
         auth.getToken(test).then((data) => {
-            console.log(data)
+            res.send(data);
             })
             .catch((err) => {
-                console.error(err)
+               res.send(err);
             });
     });
 };
