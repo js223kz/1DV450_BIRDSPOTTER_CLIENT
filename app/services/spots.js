@@ -1,14 +1,14 @@
 "use strict";
+
 const request = require('request');
 require('dotenv').config();
 
 
 module.exports = {
-
-    getBirds(){
+    getSpots(){
         let url = process.env.API_URL;
-        let path = '/api/v1/birds?key=' + process.env.API_KEY;
-
+        let path = '/api/v1/spots?key=' + process.env.API_KEY;
+             
         return new Promise((resolve, reject) => {
             request({
                 url: url + path,
@@ -21,25 +21,12 @@ module.exports = {
                 }          
             });
         });
-    }
-};
-
-
-/*var key = <my key>,
-    secret = <my secret>,
-    https = require("https"),
-    https_options = {
-        "host": <host>,
-        "path": <path>,
-        "port": <port>,
-        "method": <method>,
-        "headers": {
-            "Authorization": "Basic " + new Buffer(key + ":" + secret, "utf8").toString("base64")
-        }
     },
-    request = https.request(https_options, function(response) {
-        // Handle response
-    });*/
-
-
-
+    
+    getBird(){
+        console.log("in getbird");
+    }
+    
+    
+};
+ 
