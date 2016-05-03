@@ -1,19 +1,27 @@
 "use strict";
-const https = require('https');
+const request = require('request');
 require('dotenv').config();
 
 
 module.exports = {
-    
-    let options = {
-        host = 
-    
+
+    getBirds(){
+        let url = process.env.API_URL;
+        let path = '/api/v1/birds?key=' + process.env.API_KEY;
+
+        return new Promise((resolve, reject) => {
+            request({
+                url: url + path,
+                method: 'GET'
+            }, (error, response, body) =>{
+                if (error) {
+                   reject(new Error('Failed to load API: ' + error));
+                }else{
+                    resolve(body);
+                }          
+            });
+        });
     }
-    
-    function getBirds(){
-    
-    }
-    
 };
 
 
