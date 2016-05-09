@@ -23,7 +23,22 @@ module.exports = function(app) {
             .catch((err) => {
                 res.status(err.statusCode).send(err.message);
             });
-        });
+    });
+    
+    app.post('/spots', (req, res) => {
+         let auth = req.headers.authorization;
+         let spot = req.body.spot;
+         
+         spots.createSpot(auth, spot).then((data) => {
+             console.log(data);
+            res.send(data);
+            })
+            .catch((err) => {
+             console.log(err);
+                res.status(err.statusCode).send(err.message);
+            });
+      
+    });
     
     app.delete('/spots/:id', (req, res) => {
         let auth = req.headers.authorization
