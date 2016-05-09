@@ -1,7 +1,7 @@
 "use strict";
 const   spots = require('./services/spots'),
         birds = require('./services/birds'),
-        auth = require('./services/authenticate')
+        auth = require('./services/login')
     
 
 
@@ -21,7 +21,18 @@ module.exports = function(app) {
             res.send(data);
             })
             .catch((err) => {
-                res.send(err);
+                res.status(err.statusCode).send(err.message);
+            });
+        });
+    
+    app.delete('/spots/:id', (req, res) => {
+        let auth = req.headers.authorization
+        let id = req.params.id;
+        spots.deleteSpot(auth, id).then((data) => {
+            res.send(data);
+            })
+            .catch((err) => {
+               res.status(err.statusCode).send(err.message);
             });
         });
     
@@ -31,18 +42,18 @@ module.exports = function(app) {
             res.send(data);
             })
             .catch((err) => {
-                res.send(err);
+                res.status(err.statusCode).send(err.message);
             });
         });
     
-    // get token restricted actions -------------------------------------------------------------
-    app.post('/authenticate/:auth', (req, res) =>{
-        let test = req.params.auth;
-        auth.getToken(test).then((data) => {
+    // returns token for restricted actions when user logs in -------------------------------------------------------------
+    app.post('/login/:auth', (req, res) =>{
+        let auth = req.params.auth;
+        auth.getToken(auth).then((data) => {
             res.send(data);
             })
             .catch((err) => {
-               res.send(err);
+               res.status(err.statusCode).send(err.message);
             });
     });
 };

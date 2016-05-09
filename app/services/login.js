@@ -14,11 +14,13 @@ module.exports = {
                     "Authorization": 'Basic ' + auth
                     }
             }, (error, response, body) =>{
-                if (error) {
-                   reject(new Error('Failed to load API: ' + error));
-                }else{
-                    resolve(body);
-                }          
+                if(error){
+                    reject(error);
+                } 
+                if(response.statusCode !== 200){
+                     reject({statusCode: response.statusCode, message: body});
+                }
+                resolve(body);
             });
         });
     }
