@@ -1,17 +1,19 @@
 "use strict";
-const request = require('request');
 require('dotenv').config();
+const   request = require('request'),
+        fs = require('fs'),
+        path =  process.env.API_BIRDS_PATH,
+        apikey = process.env.API_KEY,
+        url = process.env.API_URL;
+
 
 
 module.exports = {
 
     getBirds(){
-        let url = process.env.API_URL;
-        let path = '/api/v1/birds?key=' + process.env.API_KEY;
-
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) =>{
             request({
-                url: url + path,
+                url: url + path + apikey,
                 method: 'GET'
             }, (error, response, body) =>{
                 if(error){
@@ -22,6 +24,17 @@ module.exports = {
                 }
                 resolve(body);
             });
+        });
+    },
+    
+    saveBirdsToFile(birds){
+        return new Promise((resolve, reject) =>{
+            fs.writeFile("./files/birds.json", birds,(error) =>{
+                if(error) {
+                    reject("Error when caching positions: " + error);
+                }
+                resolve();
+            }); 
         });
     }
 };

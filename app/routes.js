@@ -1,7 +1,7 @@
 "use strict";
 const   spots = require('./services/spots'),
         birds = require('./services/birds'),
-        auth = require('./services/login')
+        auth = require('./services/login');
     
 
 
@@ -63,19 +63,19 @@ module.exports = function(app) {
             res.send(data);
             })
             .catch((err) => {
+                console.log(err);
                res.status(err.statusCode).send(err.message);
             });
-        });
+    });
     
     // birds -------------------------------------------------------------
     app.get('/birds', (req, res)=> {
-      birds.getBirds().then((data) => {
-            res.send(data);
-            })
-            .catch((err) => {
-                res.status(err.statusCode).send(err.message);
-            });
-        });
+       birds.getBirds().then((birdsData) =>{
+           birds.saveBirdsToFile(birdsData).then(() =>{
+               res.send("got it");
+           })
+       }); 
+    });
     
     // returns token for restricted actions when user logs in -------------------------------------------------------------
     app.post('/login/:auth', (req, res) =>{
@@ -88,5 +88,12 @@ module.exports = function(app) {
             });
     });
 };
+
+/*birds.getBirds().then((data) => {
+            res.send(data);
+            })
+            .catch((err) => {
+                res.status(err.statusCode).send(err.message);
+            });*/
 
 
