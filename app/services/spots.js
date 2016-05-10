@@ -1,17 +1,16 @@
 "use strict";
 require('dotenv').config();
 const request = require('request'),
+      path =  process.env.API_SPOTS_PATH,
+      apikey = process.env.API_KEY,
       url = process.env.API_URL;
 
 
 module.exports = {
-    getSpots(){
-       // let url = process.env.API_URL;
-        let path = '/api/v1/spots' + process.env.API_KEY;
-             
+    getSpots(){             
         return new Promise((resolve, reject) => {
             request({
-                url: url + path,
+                url: url + path + apikey,
                 method: 'GET'
             }, (error, response, body) =>{
                 if(error){
@@ -26,15 +25,14 @@ module.exports = {
     },
     
     createSpot(auth, spot){
-        let path = '/api/v1/spots/' + process.env.API_KEY;
-        let lat = '&latitude=' + spot.latitude;
+        /*let lat = '&latitude=' + spot.latitude;
         let lng = '&longitude=' + spot.longitude;
         let bird= '&bird=' + spot.bird;
-        let birdspotter = '&birdspotter=' + spot.birdspotter;
+        let birdspotter = '&birdspotter=' + spot.birdspotter;*/
         
         return new Promise((resolve, reject) => {
             request({
-                url: url + path,
+                url: url + path + apikey,
                 method: 'POST',
                 headers : {
                     "Authorization" : auth,
@@ -54,23 +52,28 @@ module.exports = {
         });
     },
     
-    
- /*   request({
-    url: 'https://modulus.io/contact/demo', //URL to hit
-    qs: {from: 'blog example', time: +new Date()}, //Query string data
-    method: 'POST',
-    headers: {
-        'Content-Type': 'MyContentType',
-        'Custom-Header': 'Custom Value'
+    updateSpot(auth, spot, id){
+        return new Promise((resolve, reject) => {
+            request({
+                url: url + path + '/' + id + apikey,
+                method: 'PUT',
+                headers : {
+                    "Authorization" : auth,
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({spot})
+                
+            }, (error, response, body) =>{
+                if(error){
+                    reject(error)
+                } 
+                if(response.statusCode !== 201){
+                    reject({statusCode: response.statusCode, message: body});
+                } 
+                resolve(body);
+            });
+        });
     },
-    body: 'Hello Hello! String body!' //Set the body as a string
-}, function(error, response, body){
-    if(error) {
-        console.log(error);
-    } else {
-        console.log(response.statusCode, body);
-    }
-});*/
     
     deleteSpot(auth, id){
        

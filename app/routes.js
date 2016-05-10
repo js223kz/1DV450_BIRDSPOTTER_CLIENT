@@ -40,6 +40,22 @@ module.exports = function(app) {
       
     });
     
+    app.put('/spots/:id', (req, res) => {
+         let auth = req.headers.authorization;
+         let spot = req.body.spot;
+         let id = req.params.id;
+         
+         spots.updateSpot(auth, spot, id).then((data) => {
+             console.log(data);
+            res.send(data);
+            })
+            .catch((err) => {
+             console.log(err);
+                res.status(err.statusCode).send(err.message);
+            });
+      
+    });
+    
     app.delete('/spots/:id', (req, res) => {
         let auth = req.headers.authorization
         let id = req.params.id;
