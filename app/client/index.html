@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html ng-app="birdSpotterApp" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Birdspotter</title>
+    <meta name="description" content="En applikation för fågelskådare">
+    <meta name="author" content="Johanna Szepanski">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Set base url to supprt url:s without hashes -->
+    <base href="/">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    
+    <!-- HTML5 elements in IE --> 
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Partials --> 
+    <ng-view class="viewcontainer"></ng-view>
+
+    <!-- CDN --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    
+    
+    <!-- Application resources -->
+    <script src="/app.js"></script>
+    <script src="services/trafficInfoService.js"></script>
+    <script src="controllers/mainController.js"></script>
+    <script src="services/mapMarkerService.js"></script>
+    <script src="services/mapLayerService.js"></script>
+    <script src="services/constantService.js"></script>
+</body>
+</html>
