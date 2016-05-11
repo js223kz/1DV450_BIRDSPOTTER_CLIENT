@@ -36,6 +36,17 @@ module.exports = {
                 resolve();
             }); 
         });
+    },
+    
+    readBirdsFromFile(){
+        return new Promise((resolve, reject) =>{
+            fs.readFile("./files/birds.json", (error, data) =>{
+                if(error) {
+                    reject("Error when caching positions: " + error);
+                }
+                resolve(data);
+            }); 
+        });
     }
 };
 
