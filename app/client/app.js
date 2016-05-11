@@ -6,7 +6,8 @@ birdSpotterApp.config(['$routeProvider', '$locationProvider',
     $routeProvider.
       when('/', {
         templateUrl: 'partials/startView.html',
-        controller: 'startController'
+        controller: 'StartController',
+        controllerAs: 'start'
       }).
       otherwise({
         redirectTo: '/'
