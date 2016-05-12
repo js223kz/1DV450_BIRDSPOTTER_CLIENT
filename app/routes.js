@@ -17,12 +17,12 @@ module.exports = function(app) {
     
     // spots -------------------------------------------------------------
     app.get('/spots', (req, res) => {
-      spots.getSpots().then((data) => {
-            res.send(data);
-            })
-            .catch((err) => {
-                res.status(err.statusCode).send(err.message);
-            });
+        
+        spots.readSpotsFromFile().then((spots) =>{
+                res.send(spots);
+            }).catch((error) =>{
+                res.status(500).send(err);
+        });  
     });
     
     app.post('/spots', (req, res) => {
@@ -30,7 +30,6 @@ module.exports = function(app) {
          let spot = req.body.spot;
          
          spots.createSpot(auth, spot).then((data) => {
-             console.log(data);
             res.send(data);
             })
             .catch((err) => {
