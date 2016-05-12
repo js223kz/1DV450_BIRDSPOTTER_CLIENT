@@ -9,18 +9,17 @@ angular.module('birdSpotterApp')
             };
 
         function getCollection(url){
-
             return $http({
                 method: 'GET',
                 url: url,
                 headers: {}
             })
-            .then(saveResponse)
+            .then(saveCollection)
             .catch(responseError);
 
         }
 
-         function saveResponse(response){
+         function saveCollection(response){
             let collection = undefined;
             
              if(response.data.hasOwnProperty('birds')){

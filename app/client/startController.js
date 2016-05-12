@@ -12,19 +12,40 @@ angular.module('birdSpotterApp')
             attribution: constants.ATTRIBUTION
         }).addTo(map);
         
-        ApiService.getCollection(constants.BIRDS_URL);
-        
-         ApiService.getCollection(constants.BIRDS_URL)
-             .then(getCollection)
-             .catch(showErrorMessage);
-        
-        function getCollection(){
-            console.log(CacheService.getCachedCollection(constants.BIRDS_STORAGE));
+        if(sessionStorage.getItem(constants.SPOTS_STORAGE) === null){
+            Promise.all([
+                ApiService.getCollection(constants.BIRDS_URL),
+                ApiService.getCollection(constants.SPOTS_URL),  
+            ])
+            .then(getCachedCollections)
+            .catch(showErrorMessage);
+
+        }else{
+            getCachedCollections();
         }
-        
-        function showErrorMessage(error){
-            //show in text
+        vm.showErrorMessage = ((error) =>{
             console.log(error);
+        });
+        
+        function getCachedCollections(){
+            let markers = [];
+            console.log("inne i get cached");
+            vm.birds = CacheService.getCachedCollection(constants.BIRDS_STORAGE);
+            vm.spots = CacheService.getCachedCollection(constants.SPOTS_STORAGE);
+            
+            
+            vm.spots.forEach((value) =>{
+                var circle = L.circle([Number(value.latitude), Number(value.longitude)], 500, {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5
+            });
+            
+                markers.push(circle);
+
+            });
+             let layer = L.layerGroup(markers);
+                map.addLayer(layer);
         }
 
     }
