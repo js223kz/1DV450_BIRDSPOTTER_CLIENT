@@ -70,11 +70,11 @@ module.exports = function(app) {
     
     // birds -------------------------------------------------------------
     app.get('/birds', (req, res)=> {
-       birds.getBirds().then((birdsData) =>{
-           birds.saveBirdsToFile(birdsData).then(() =>{
-               res.send("got it");
-           })
-       }); 
+        birds.readBirdsFromFile().then((birds) =>{
+             res.send(birds);
+        }).catch((error) =>{
+            res.status(500).send(err);
+        });
     });
     
     // returns token for restricted actions when user logs in -------------------------------------------------------------
