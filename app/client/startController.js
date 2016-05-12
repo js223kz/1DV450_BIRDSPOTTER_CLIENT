@@ -1,15 +1,5 @@
 'use strict';
 
-
-export default class StartController {
-  constructor() {
-    this.name = "Bobby Tables";
-      console.log("det funkar på något sätt");
-  }
-}
-
-
-/*(function(){
     
 angular.module('birdSpotterApp')
      .controller('StartController', ['constants', 'ApiService', 'CacheService', startController]);  
@@ -38,4 +28,3 @@ angular.module('birdSpotterApp')
         }
 
     }
-}());*/
