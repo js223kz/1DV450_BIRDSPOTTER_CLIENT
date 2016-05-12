@@ -7,6 +7,7 @@ let express  = require('express'),
     bodyParser = require('body-parser'),
     schedule = require('node-schedule'),
     birdsService = require('./services/birds'),
+    spotsService = require('./services/spots'),
     port = process.env.PORT || 8080;
 
 
@@ -25,6 +26,16 @@ schedule.scheduleJob({hour: 22, minute: 30, dayOfWeek: 0}, () => {
     let promise = birdsService.getBirds();
     promise.then((birds) =>{
         return birdsService.saveBirdsToFile(birds);         
+    }).catch((error) =>{
+        console.log(error);  
+    });
+});
+
+schedule.scheduleJob('*/10 * * * *', () => {
+    console.log("updating spots");
+    let promise = spotsService.getSpots();
+    promise.then((spots) =>{
+        return spotsService.saveSpotsToFile(spots);         
     }).catch((error) =>{
         console.log(error);  
     });
