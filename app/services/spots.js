@@ -1,6 +1,7 @@
 "use strict";
 require('dotenv').config();
 const request = require('request'),
+      fs = require('fs'),
       path =  process.env.API_SPOTS_PATH,
       apikey = process.env.API_KEY,
       url = process.env.API_URL;
@@ -21,6 +22,28 @@ module.exports = {
                 } 
                 resolve(body);
             });
+        });
+    },
+    
+    saveSpotsToFile(spots){
+        return new Promise((resolve, reject) =>{
+            fs.writeFile("./files/spots.json", spots,(error) =>{
+                if(error) {
+                    reject("Error when saving spots to file: " + error);
+                }
+                resolve();
+            }); 
+        });
+    },
+    
+    readSpotsFromFile(){
+        return new Promise((resolve, reject) =>{
+            fs.readFile("./files/spots.json", (error, data) =>{
+                if(error) {
+                    reject("Error when reading spots from file: " + error);
+                }
+                resolve(data);
+            }); 
         });
     },
     
