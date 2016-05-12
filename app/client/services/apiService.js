@@ -21,9 +21,17 @@ angular.module('birdSpotterApp')
         }
 
          function saveResponse(response){
-            let birds = JSON.stringify(response.data.birds);
-            sessionStorage.setItem(constants.BIRDS_STORAGE, birds);
-            deferred.resolve();
+            let collection = undefined;
+            
+             if(response.data.hasOwnProperty('birds')){
+                collection = JSON.stringify(response.data.birds);
+                sessionStorage.setItem(constants.BIRDS_STORAGE, collection);
+                deferred.resolve();
+            }else{
+                collection = JSON.stringify(response.data.spots);
+                sessionStorage.setItem(constants.SPOTS_STORAGE, collection);
+                deferred.resolve();
+            }
             return deferred.promise;
         }
 
