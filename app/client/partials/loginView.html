@@ -1,0 +1,28 @@
+<h1>LoginView</h1>
+<div class="col-md-4">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Logga in</h3>
+    </div>
+    <div class="panel-body">
+       <form name="loginForm" class="simple-form" required>
+         E-mail: <br />
+        <input type="email"  name="userEmail" ng-model="user.email" required/><br />
+        <div ng-messages="loginForm.userEmail.$error" ng-if="loginForm.userEmail.$dirty">
+            <div ng-message="required">E-post måste fyllas i</div>
+            <div ng-message="email">E-post är ogiltig</div>
+        </div>
+         
+           Password: <br />
+         <input type="password" name="userPassword" ng-model="user.password" ng-minlength="6" required/>           
+        <div ng-messages="loginForm.userPassword.$error" ng-if="loginForm.userPassword.$dirty">
+            <div ng-message="required">Lösenord måste fyllas i</div>
+            <div ng-message="minlength">Lösenord måste innehålla minst 6 tecken</div>
+        </div>    
+
+           
+         <button data-ng-click="user.login()">Logga in</button>
+       </form>
+    </div>
+ </div>
+</div>

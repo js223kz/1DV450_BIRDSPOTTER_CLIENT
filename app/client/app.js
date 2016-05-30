@@ -1,6 +1,6 @@
 "use strict";
 
-let birdSpotterApp = angular.module('birdSpotterApp', ['ngRoute']);
+let birdSpotterApp = angular.module('birdSpotterApp', ['ngRoute', 'ngMessages']);
 
 birdSpotterApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
@@ -10,10 +10,15 @@ birdSpotterApp.config(['$routeProvider', '$locationProvider',
         controller: 'StartController',
         controllerAs: 'start'
       }).
+        when('/login', {
+            templateUrl: 'partials/loginView.html',
+            controller: 'LoginController',
+            controllerAs: 'user'
+          }).
       otherwise({
         redirectTo: '/'
       });
       
       //pretty url:s without hashtag
-      $locationProvider.html5Mode(true);
+      //$locationProvider.html5Mode(true);
   }]);

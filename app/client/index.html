@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Set base url to supprt url:s without hashes -->
-    <base href="/">
+    <base href="/index.html">
 
 
     <!-- CSS -->
@@ -25,6 +25,10 @@
     <![endif]-->
 </head>
 <body>
+    <header ng-controller="HeaderController as header">
+        <button ng-click="header.login()">Login</button>
+    </header>
+    
     <!-- Partials --> 
     <ng-view class="viewcontainer"></ng-view>
 
@@ -39,9 +43,12 @@
     <!-- Application resources -->
     <script src="/app.js"></script>
     <script src="/startController.js"></script>
+    <script src="controllers/headerController.js"></script>
+    <script src="controllers/loginController.js"></script>
     <script src="/constantService.js"></script>
     <script src="services/apiService.js"></script>
     <script src="services/cacheService.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
 
 </body>
 </html>
