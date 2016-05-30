@@ -1,6 +1,6 @@
 "use strict";
 
-let birdSpotterApp = angular.module('birdSpotterApp', ['ngRoute', 'ngMessages']);
+let birdSpotterApp = angular.module('birdSpotterApp', ['ngRoute', 'ngMessages', 'base64']);
 
 birdSpotterApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {

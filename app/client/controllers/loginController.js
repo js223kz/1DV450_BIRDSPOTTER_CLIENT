@@ -2,11 +2,15 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('LoginController', ['constants', 'ApiService', 'CacheService', '$location', loginController]);  
+     .controller('LoginController', ['constants', '$location', 'AuthUserService', loginController]);  
 
-    function loginController(constants, ApiService, CacheService, $location){
-       
+    function loginController(constants, $location, AuthUserService){
+        let vm = this;
         
-        console.log("login");
+        vm.login = function(){
+            AuthUserService.tryToLogin(vm.email, vm.password);
+        }
+        
+        //info@marcus.se:hallojsa
  
     }

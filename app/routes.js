@@ -1,7 +1,7 @@
 "use strict";
 const   spots = require('./services/spots'),
         birds = require('./services/birds'),
-        auth = require('./services/login');
+        login = require('./services/login');
     
 
 
@@ -78,11 +78,13 @@ module.exports = function(app) {
     
     // returns token for restricted actions when user logs in -------------------------------------------------------------
     app.post('/login/:auth', (req, res) =>{
-        let auth = req.params.auth;
-        auth.getToken(auth).then((data) => {
+        let credentials = req.params.auth;
+         login.getToken(credentials).then((data) => {
+             console.log(data);
             res.send(data);
             })
             .catch((err) => {
+                console.log(err);
                res.status(err.statusCode).send(err.message);
             });
     });

@@ -7,6 +7,7 @@
             SPOTS_URL: '/spots',
             BIRDS_URL: '/birds',
             BIRDS_STORAGE: 'birds',
-            SPOTS_STORAGE: 'spots'
+            SPOTS_STORAGE: 'spots',
+            LOGIN_URL: '/login/'
         });
 }());
