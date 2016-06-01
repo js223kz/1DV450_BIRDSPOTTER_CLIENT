@@ -6,8 +6,10 @@
             ATTRIBUTION: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             SPOTS_URL: '/spots',
             BIRDS_URL: '/birds',
+            LOGIN_URL: '/login/',
             BIRDS_STORAGE: 'birds',
             SPOTS_STORAGE: 'spots',
-            LOGIN_URL: '/login/'
+            USER_STORAGE: 'user'
+            
         });
 }());

@@ -17,9 +17,6 @@ module.exports = {
                 if(error){
                     reject(error)
                 } 
-                if(response.statusCode !== 200){
-                    reject({statusCode: response.statusCode, message: body});
-                } 
                 resolve(body);
             });
         });
@@ -67,9 +64,6 @@ module.exports = {
                 if(error){
                     reject(error)
                 } 
-                if(response.statusCode !== 201){
-                    reject({statusCode: response.statusCode, message: body});
-                } 
                 resolve(body);
             });
         });
@@ -89,9 +83,6 @@ module.exports = {
             }, (error, response, body) =>{
                 if(error){
                     reject(error)
-                } 
-                if(response.statusCode !== 201){
-                    reject({statusCode: response.statusCode, message: body});
                 } 
                 resolve(body);
             });
@@ -113,9 +104,6 @@ module.exports = {
                 if(error){
                     reject(error);
                 } 
-                if(response.statusCode !== 200){
-                     reject({statusCode: response.statusCode, message: body});
-                }
                 resolve(body);
             });
         });

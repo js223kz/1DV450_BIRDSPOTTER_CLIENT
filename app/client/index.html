@@ -8,7 +8,7 @@
     <meta name="author" content="Johanna Szepanski">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- Set base url to supprt url:s without hashes -->
+    <!-- Set base url to support url:s without hashes -->
     <base href="/index.html">
 
 
@@ -26,7 +26,8 @@
 </head>
 <body>
     <header ng-controller="HeaderController as header">
-        <button ng-click="header.login()">Login</button>
+        <button ng-click="header.login()">Logga in</button>
+        <button ng-click = "header.addSpot()">Lägg till en spot</button>
     </header>
     
     <!-- Partials --> 
@@ -38,6 +39,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-base64/angular-base64.js"></script>
     
     
     <!-- Application resources -->
@@ -45,12 +48,12 @@
     <script src="/startController.js"></script>
     <script src="controllers/headerController.js"></script>
     <script src="controllers/loginController.js"></script>
+    <script src="controllers/spotController.js"></script>
     <script src="/constantService.js"></script>
     <script src="services/apiService.js"></script>
     <script src="services/cacheService.js"></script>
-    <script src="services/authUserService.js"></script>
-    <script src="/bower_components/angular-messages/angular-messages.js"></script>
-    <script src="/bower_components/angular-base64/angular-base64.js"></script>
+    <script src="services/loginService.js"></script>
+    
 
 </body>
 </html>

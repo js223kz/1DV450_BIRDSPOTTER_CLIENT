@@ -2,15 +2,26 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('LoginController', ['constants', '$location', 'AuthUserService', loginController]);  
+     .controller('LoginController', ['constants', '$location', 'LoginService', loginController]);  
 
-    function loginController(constants, $location, AuthUserService){
+    
+    function loginController(constants, $location, LoginService){
         let vm = this;
         
         vm.login = function(){
-            AuthUserService.tryToLogin(vm.email, vm.password);
+            LoginService.tryToLogin(vm.email, vm.password)
+                .then(loggedIn)
+                .catch(showErrorMessage);
         }
         
-        //info@marcus.se:hallojsa
+        function loggedIn(response){
+            //let user = JSON.parse(sessionStorage.getItem(constants.USER_STORAGE));
+            //console.log(user.username);
+           $location.path( "/" );
+        }
+        
+        function showErrorMessage(response){
+            console.log(response.status);
+        }
  
     }

@@ -2,13 +2,17 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('HeaderController', ['constants', 'ApiService', 'CacheService', '$location', headerController]);  
+     .controller('HeaderController', ['constants', '$location', headerController]);  
 
-    function headerController(constants, ApiService, CacheService, $location){
+    function headerController(constants, $location){
         let vm = this;
         
         vm.login = function(){
             $location.path( "/login" );
+        }
+        
+        vm.addSpot = function(){
+            $location.path( "/ny_spot" );
         }
  
     }
