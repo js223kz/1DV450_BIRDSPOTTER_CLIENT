@@ -15,7 +15,11 @@ function headerController(constants, $location, $window, LoginService){
         }   
     }
 
-    vm.addSpot = function(){
-        $location.path(constants.NEWSPOT_PATH);
+    vm.showAddSpotPanel = function(){
+        vm.addSpot = true;
+    }
+    
+    vm.closeAddSpotPanel = function(){
+        vm.addSpot = false;
     }
 }

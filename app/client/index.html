@@ -29,9 +29,24 @@
     <!-- Header should be visible on every page --> 
     <header data-ng-controller="HeaderController as header">
         <button data-ng-cloak data-ng-click="header.login()"> {{ $root.loggedInUser == undefined ? 'Logga in' : 'Logga ut' }}</button>
-        <button data-ng-show="$root.loggedInUser">Lägg till en spot</button>
+        <button data-ng-show="$root.loggedInUser" data-ng-click="header.showAddSpotPanel()">Lägg till en spot</button>
+
+        <div class="panel panel-primary" data-ng-show="header.addSpot" data-ng-cloak>
+        <div class="panel-heading">
+            <h3 class="panel-title">Lägg till en ny birdspot</h3>
+            <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
+        </div>
+        <p>{{spot.errorMessage}}</p>
+          <div class="panel-body">
+           <form name="addSpotForm" class="simple-form" data-ng-submit="spot.addSpot()" required>
+             <div class="bar">
+                    <input type="text" class="search" ng-model="searchString" placeholder="Sök fågel" />
+                </div>      
+               <button>Spara</button>
+           </form>
+        </div>
+     </div>
     </header>
-       
     <!-- Partials --> 
     <ng-view class="viewcontainer"></ng-view>
 
