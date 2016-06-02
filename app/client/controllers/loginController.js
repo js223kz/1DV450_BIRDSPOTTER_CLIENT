@@ -17,8 +17,6 @@ function loginController(constants, $location, LoginService){
 
     function showErrorMessage(response){
         vm.errorMessage = 'Felaktiga inloggningsuppgifter.';       
-        //return null;
-        
     }
 
 }

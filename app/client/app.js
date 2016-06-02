@@ -39,12 +39,10 @@ let birdSpotterApp = angular.module('birdSpotterApp', ['ngRoute', 'ngMessages', 
  birdSpotterApp.run(function($rootScope, $window) {
     $rootScope.$on("$locationChangeStart", function(event, next, current) { 
         if($window.sessionStorage.user == undefined){
-             $rootScope.loggedInUser = undefined;
-            console.log(next);
+            $rootScope.loggedInUser = undefined;
             
         }else{
-          $rootScope.loggedInUser = $window.sessionStorage.user;
-             console.log(next);
+            $rootScope.loggedInUser = $window.sessionStorage.user;
         }
     });
 });

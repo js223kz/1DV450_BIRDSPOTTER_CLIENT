@@ -29,7 +29,7 @@
     <!-- Header should be visible on every page --> 
     <header data-ng-controller="HeaderController as header">
         <button data-ng-cloak data-ng-click="header.login()"> {{ $root.loggedInUser == undefined ? 'Logga in' : 'Logga ut' }}</button>
-        <button data-ng-click = "header.addSpot()">Lägg till en spot</button>
+        <button data-ng-show="$root.loggedInUser">Lägg till en spot</button>
     </header>
        
     <!-- Partials --> 

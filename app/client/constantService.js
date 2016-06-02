@@ -20,7 +20,7 @@
             //Paths
             HOME_PATH: '/',
             LOGIN_PATH: '/login',
-            NEWSPOT_PATH: '/ny_spot'
-            
+            NEWSPOT_PATH: '/ny_spot',
+        
         });
 }());

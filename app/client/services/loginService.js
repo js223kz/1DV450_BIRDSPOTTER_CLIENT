@@ -19,8 +19,7 @@ angular.module('birdSpotterApp')
         }
         
         function successfulLogin(response){
-            $window.sessionStorage.setItem('user', JSON.stringify(response));
-            //$rootScope.loggedInUser = response;
+            $window.sessionStorage.setItem(constants.USER_STORAGE, JSON.stringify(response));
             $location.path(constants.HOME_PATH);
         }
         
@@ -30,8 +29,8 @@ angular.module('birdSpotterApp')
         }
         
         function logout(){
-            $window.sessionStorage.removeItem('user');
-             $window.location.href = constants.HOME_PATH;
+            $window.sessionStorage.removeItem(constants.USER_STORAGE);
+            $window.location.href = constants.HOME_PATH;
         }
         
          return{
