@@ -1,10 +1,10 @@
 "use strict";
 angular.module('birdSpotterApp')
-     .factory('LoginService', ['constants', '$q', '$http', '$base64', loginService]);  
+     .factory('LoginService', ['constants', '$q', '$http', '$base64','$window', '$location', loginService]);  
    
-    function loginService(constants, $q, $http, $base64){
+    function loginService(constants, $q, $http, $base64, $window, $location){
         let deferred = $q.defer();
-        let userInfo;
+        //$rootScope.loggedInUser = null;
         
         function tryToLogin(email, pwd){
             let credentials = $base64.encode(email+':'+ pwd);
@@ -19,10 +19,9 @@ angular.module('birdSpotterApp')
         }
         
         function successfulLogin(response){
-            userInfo = JSON.stringify(response.data);
-            sessionStorage.setItem(constants.USER_STORAGE, userInfo);
-            deferred.resolve(response);
-            return deferred.promise;
+            $window.sessionStorage.setItem('user', JSON.stringify(response));
+            //$rootScope.loggedInUser = response;
+            $location.path(constants.HOME_PATH);
         }
         
         function failedLogin(response){
@@ -31,16 +30,12 @@ angular.module('birdSpotterApp')
         }
         
         function logout(){
-            let user = sessionStorage.getItem(constants.USER_STORAGE);
-            user = null;
-        }
-        
-        function isUserLoggedIn(){
-            return JSON.parse(sessionStorage.getItem(constants.USER_STORAGE));
+            $window.sessionStorage.removeItem('user');
+             $window.location.href = constants.HOME_PATH;
         }
         
          return{
             tryToLogin: tryToLogin,
-            isUserLoggedIn: isUserLoggedIn
+            logout: logout
         };
     }

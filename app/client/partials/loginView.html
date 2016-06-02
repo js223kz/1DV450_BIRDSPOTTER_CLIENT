@@ -4,24 +4,23 @@
     <div class="panel-heading">
       <h3 class="panel-title">Logga in</h3>
     </div>
-    <div class="panel-body">
-       <form name="loginForm" class="simple-form" required>
+    <p>{{user.errorMessage}}</p>
+      <div class="panel-body">
+       <form name="loginForm" class="simple-form" data-ng-submit="user.login(user.email, user.password)" required>
          E-mail: <br />
-        <input type="email"  name="userEmail" ng-model="user.email" required/><br />
-        <div ng-messages="loginForm.userEmail.$error" ng-if="loginForm.userEmail.$dirty">
-            <div ng-message="required">E-post måste fyllas i</div>
-            <div ng-message="email">E-post är ogiltig</div>
+        <input type="email"  name="userEmail" data-ng-model="user.email" required/><br />
+        <div data-ng-messages="loginForm.userEmail.$error" data-ng-if="loginForm.userEmail.$dirty">
+            <div data-ng-message="required">E-post måste fyllas i</div>
+            <div data-ng-message="email">E-post är ogiltig</div>
         </div>
          
            Password: <br />
-         <input type="password" name="userPassword" ng-model="user.password" ng-minlength="6" required/>           
-        <div ng-messages="loginForm.userPassword.$error" ng-if="loginForm.userPassword.$dirty">
-            <div ng-message="required">Lösenord måste fyllas i</div>
-            <div ng-message="minlength">Lösenord måste innehålla minst 6 tecken</div>
+         <input type="password" name="userPassword" data-ng-model="user.password" data-ng-minlength="6" required/>           
+        <div data-ng-messages="loginForm.userPassword.$error" data-ng-if="loginForm.userPassword.$dirty">
+            <div data-ng-message="required">Lösenord måste fyllas i</div>
+            <div data-ng-message="minlength">Lösenord måste innehålla minst 6 tecken</div>
         </div>    
-
-           
-         <button data-ng-click="user.login()">Logga in</button>
+        <button>Logga in</button>
        </form>
     </div>
  </div>

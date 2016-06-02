@@ -2,21 +2,20 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('HeaderController', ['constants', '$location', 'LoginService', headerController]); 
-    
-    function headerController(constants, $location, LoginService){
-        let vm = this;
-        vm.userLoggedIn = LoginService.isUserLoggedIn();
-        
-        console.log(vm.userLoggedIn);
-        
-        vm.login = function(){
-            $location.path( "/login" );
-        }
-        
-        vm.addSpot = function(){
-            $location.path( "/ny_spot" );
-        }
+     .controller('HeaderController', ['constants', '$location', '$window', 'LoginService', headerController]); 
  
+function headerController(constants, $location, $window, LoginService){
+    let vm = this;
+    
+    vm.login = function(){
+        if($window.sessionStorage.user === undefined){
+            $location.path(constants.LOGIN_PATH);
+        }else{
+            LoginService.logout();
+        }   
     }
 
+    vm.addSpot = function(){
+        $location.path(constants.NEWSPOT_PATH);
+    }
+}

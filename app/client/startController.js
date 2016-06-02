@@ -2,13 +2,14 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('StartController', ['constants', 'ApiService', 'CacheService', startController]);  
+     .controller('StartController', ['constants', 'ApiService', 'CacheService', '$rootScope', '$scope', startController]);  
 
-    function startController(constants, ApiService, CacheService){
+    function startController(constants, ApiService, CacheService, $rootScope, $scope){
+       
         let vm = this;
         let map= L.map('map').setView([60, 17], 5);
-     
-         L.tileLayer(constants.TRAFFICLAYER, {
+              
+        L.tileLayer(constants.TRAFFICLAYER, {
             attribution: constants.ATTRIBUTION
         }).addTo(map);
         
