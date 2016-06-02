@@ -23,15 +23,13 @@ birdSpotterApp.config(['$routeProvider', '$locationProvider',
             controller: 'SpotController',
             controllerAs: 'spot',
             resolve: {
-                auth: ["$q", "LoginService", function($q, LoginService) {
-                    let userInfo = LoginService.getLoggedInUser();
+                "check":function(LoginService,$location){   //function to be resolved, accessFac and $location Injected
+                    if(LoginService.isUserLoggedIn()){    //check if the user has permission -- This happens before the page loads
 
-                      if (userInfo) {
-                        return $q.when(userInfo);
-                      } else {
-                        return $q.reject({ authenticated: false });
-                      }
-                    }]
+                    }else{
+                        $location.path('/login').replace();                //redirect user to home if it does not have permission.
+                    }
+                }
             }
           }).
       otherwise({
@@ -42,15 +40,3 @@ birdSpotterApp.config(['$routeProvider', '$locationProvider',
       //$locationProvider.html5Mode(true);
   }]);
 
-
-birdSpotterApp.run(["$rootScope", "$location", function($rootScope, $location) {
-  $rootScope.$on("$routeChangeSuccess", function(userInfo) {
-    console.log(userInfo);
-  });
-
-  $rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-    if (eventObj.authenticated === false) {
-      $location.path("/login");
-    }
-  });
-}]);

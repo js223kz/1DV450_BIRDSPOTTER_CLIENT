@@ -2,3 +2,7 @@
     height: 800px;
     width: 100%;
 }
+
+[ng\:cloak],[ng-cloak],.ng-cloak{
+    display:none !important
+}

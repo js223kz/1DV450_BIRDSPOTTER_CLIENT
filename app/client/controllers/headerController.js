@@ -2,10 +2,13 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('HeaderController', ['constants', '$location', headerController]);  
-
-    function headerController(constants, $location){
+     .controller('HeaderController', ['constants', '$location', 'LoginService', headerController]); 
+    
+    function headerController(constants, $location, LoginService){
         let vm = this;
+        vm.userLoggedIn = LoginService.isUserLoggedIn();
+        
+        console.log(vm.userLoggedIn);
         
         vm.login = function(){
             $location.path( "/login" );

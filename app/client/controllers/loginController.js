@@ -2,10 +2,10 @@
 
     
 angular.module('birdSpotterApp')
-     .controller('LoginController', ['constants', '$location', 'LoginService', loginController]);  
+     .controller('LoginController', ['constants', '$window', 'LoginService', loginController]);  
 
     
-    function loginController(constants, $location, LoginService){
+    function loginController(constants, $window, LoginService){
         let vm = this;
         
         vm.login = function(){
@@ -17,7 +17,8 @@ angular.module('birdSpotterApp')
         function loggedIn(response){
             //let user = JSON.parse(sessionStorage.getItem(constants.USER_STORAGE));
             //console.log(user.username);
-           $location.path( "/" );
+            $window.location.href = "/";
+           //$location.reload( "/" );
         }
         
         function showErrorMessage(response){

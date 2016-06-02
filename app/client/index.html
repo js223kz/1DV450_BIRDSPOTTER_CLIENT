@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css" />
-
+    
     
     <!-- HTML5 elements in IE --> 
     <!--[if lt IE 9]>
@@ -25,11 +25,12 @@
     <![endif]-->
 </head>
 <body>
-    <header ng-controller="HeaderController as header">
-        <button ng-click="header.login()">Logga in</button>
-        <button ng-click = "header.addSpot()">Lägg till en spot</button>
+     
+    <header data-ng-controller="HeaderController as header">
+        <button data-ng-cloak data-ng-click="header.login()"> {{ header.userLoggedIn == null ? 'Logga in' : 'Logga ut' }}</button>
+        <button data-ng-click = "header.addSpot()">Lägg till en spot</button>
     </header>
-    
+   
     <!-- Partials --> 
     <ng-view class="viewcontainer"></ng-view>
 

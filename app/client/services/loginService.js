@@ -4,7 +4,7 @@ angular.module('birdSpotterApp')
    
     function loginService(constants, $q, $http, $base64){
         let deferred = $q.defer();
-        let userInfo = '';
+        let userInfo;
         
         function tryToLogin(email, pwd){
             let credentials = $base64.encode(email+':'+ pwd);
@@ -30,20 +30,17 @@ angular.module('birdSpotterApp')
             return deferred.promise;
         }
         
-        function getLoggedInUser(){
-            return userInfo;
+        function logout(){
+            let user = sessionStorage.getItem(constants.USER_STORAGE);
+            user = null;
         }
         
-        
-        function init() {
-            if (sessionStorage.getItem[constants.USER_STORAGE]) {
-                userInfo = JSON.parse(sessionStorage.getItem[constants.USER_STORAGE]);
-            }
+        function isUserLoggedIn(){
+            return JSON.parse(sessionStorage.getItem(constants.USER_STORAGE));
         }
-        init();
         
          return{
             tryToLogin: tryToLogin,
-            getLoggedInUser: getLoggedInUser
+            isUserLoggedIn: isUserLoggedIn
         };
     }
