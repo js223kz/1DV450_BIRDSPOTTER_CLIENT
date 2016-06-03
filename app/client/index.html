@@ -31,24 +31,49 @@
         <button data-ng-cloak data-ng-click="header.login()"> {{ $root.loggedInUser == undefined ? 'Logga in' : 'Logga ut' }}</button>
         <button data-ng-show="$root.loggedInUser" data-ng-click="header.showAddSpotPanel()">Lägg till en spot</button>
 
+        <!-- Add new spot panel --> 
         <div class="panel panel-primary" data-ng-show="header.addSpot" data-ng-cloak>
-        <div class="panel-heading">
-            <h3 class="panel-title">Lägg till en ny birdspot</h3>
-            <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
-        </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">Lägg till en ny birdspot</h3>
+                <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
+            </div>
         <p>{{spot.errorMessage}}</p>
           <div class="panel-body">
-           <form name="addSpotForm" class="simple-form" data-ng-submit="spot.addSpot()" required>
-             <div class="bar">
-                    <input type="text" class="search" ng-model="searchString" placeholder="Sök fågel" />
-                </div>      
-               <button>Spara</button>
-           </form>
-        </div>
+              
+            <!-- selected birds list --> 
+            <div>                
+                <ul ng-repeat="bird in header.selectedBirds">
+                    <li>
+                        {{bird.name}} 
+                    </li>
+                </ul>
+            </div>
+               
+            <!-- Searchbar --> 
+            <form name="addSpotForm" class="simple-form" data-ng-submit="spot.addSpot()" required>
+                <div class="bar">
+                    <input id="header.searchBox" class="form-control" type="text" data-ng-model="header.query" data-ng-change="header.updateSearchValue()">
+                </div>
+            </form>
+              
+             <!-- SearchResult --> 
+            <div data-ng-show="header.showSearchResult" class="search-results">                
+                <ul class="birds" ng-repeat="bird in header.birds | filter: header.query | orderBy: 'birdName' ">
+                    <li>
+                        {{bird.birdName}} 
+                        <button data-ng-click="header.addBirdToSpot(bird)">Lägg till</button>
+                    </li>
+                </ul>
+            </div>
+             
+            
+            <button>Spara</button>
+         </div>
      </div>
     </header>
+    
     <!-- Partials --> 
-    <ng-view class="viewcontainer"></ng-view>
+    <ng-view class="mainView"></ng-view>
 
     <!-- CDN --> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
@@ -70,6 +95,7 @@
     <script src="services/apiService.js"></script>
     <script src="services/cacheService.js"></script>
     <script src="services/loginService.js"></script>
+    <script src="services/positionService.js"></script>
     
 
 </body>
