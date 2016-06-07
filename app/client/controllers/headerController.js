@@ -15,13 +15,7 @@ angular.module('birdSpotterApp')
  
 function headerController(constants, $location, $window, $scope, LoginService, PositionService){
     let vm = this;
-    vm.showSearchResult = false;
-    vm.birds = undefined;  
-    vm.selectedBirds = [];
-    vm.userPosition = undefined;
-    vm.errorMessage = undefined;
-    
-    
+    vm.showAddSpotView = false;
     
     vm.login = function(){
         if($window.sessionStorage.user === undefined){
@@ -31,44 +25,13 @@ function headerController(constants, $location, $window, $scope, LoginService, P
         }   
     }
     
-    function setCurrentPosition(pos){
-        vm.userPosition = pos.coords;
-    }
-    
-    function showErrorMessage(error){
-        vm.errorMessage = error;
-    }
-    
-
     vm.showAddSpotPanel = function(){
-        vm.addSpot = true;
-        vm.birds = JSON.parse(sessionStorage.getItem(constants.BIRDS_STORAGE));
-        PositionService.getCurrentPosition()
-            .then(setCurrentPosition)
-            .catch(showErrorMessage);    
+        console.log(vm.showAddSpotView);
+        vm.showAddSpotView = true;
     }
     
     vm.closeAddSpotPanel = function(){
-        vm.addSpot = false;
+        vm.showAddSpotView = false;
     }
-    
-    vm.regex = function(value){
-        return '/^' + value + '/';
-    }
-    
-    vm.updateSearchValue = function(){
-        if(vm.query.length > 0){
-            vm.showSearchResult = true;
-        }else{
-           vm.showSearchResult = false; 
-        }
-    }
-    
-    vm.addBirdToSpot = function(bird){
-        vm.selectedBirds.push({name: bird.birdName, id: bird.id});
-        console.log(bird);
-    }
-    
-    
 }
     

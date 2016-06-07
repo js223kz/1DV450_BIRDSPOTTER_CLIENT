@@ -30,46 +30,8 @@
     <header data-ng-controller="HeaderController as header">
         <button data-ng-cloak data-ng-click="header.login()"> {{ $root.loggedInUser == undefined ? 'Logga in' : 'Logga ut' }}</button>
         <button data-ng-show="$root.loggedInUser" data-ng-click="header.showAddSpotPanel()">Lägg till en spot</button>
-
-        <!-- Add new spot panel --> 
-        <div class="panel panel-primary" data-ng-show="header.addSpot" data-ng-cloak>
-            <div class="panel-heading">
-                <h3 class="panel-title">Lägg till en ny birdspot</h3>
-                <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
-            </div>
-        <p>{{spot.errorMessage}}</p>
-          <div class="panel-body">
-              
-            <!-- selected birds list --> 
-            <div>                
-                <ul ng-repeat="bird in header.selectedBirds">
-                    <li>
-                        {{bird.name}} 
-                    </li>
-                </ul>
-            </div>
-               
-            <!-- Searchbar --> 
-            <form name="addSpotForm" class="simple-form" data-ng-submit="spot.addSpot()" required>
-                <div class="bar">
-                    <input id="header.searchBox" class="form-control" type="text" data-ng-model="header.query" data-ng-change="header.updateSearchValue()">
-                </div>
-            </form>
-              
-             <!-- SearchResult --> 
-            <div data-ng-show="header.showSearchResult" class="search-results">                
-                <ul class="birds" ng-repeat="bird in header.birds | filter: header.query | orderBy: 'birdName' ">
-                    <li>
-                        {{bird.birdName}} 
-                        <button data-ng-click="header.addBirdToSpot(bird)">Lägg till</button>
-                    </li>
-                </ul>
-            </div>
-             
-            
-            <button>Spara</button>
-         </div>
-     </div>
+        <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
+        <div ng-if="header.showAddSpotView" ng-include="'partials/addSpotView.html'"></div>
     </header>
     
     <!-- Partials --> 
