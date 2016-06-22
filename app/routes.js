@@ -1,7 +1,7 @@
 "use strict";
 const   spots = require('./services/spots'),
         birds = require('./services/birds'),
-        auth = require('./services/login');
+        login = require('./services/login');
     
 
 
@@ -18,25 +18,27 @@ module.exports = function(app) {
     // spots -------------------------------------------------------------
     app.get('/spots', (req, res) => {
         
-        spots.readSpotsFromFile().then((spots) =>{
-                res.send(spots);
-            }).catch((error) =>{
-                res.status(500).send(err);
+        spots.getSpots()
+            .then((response) =>{
+            console.log("getSpots");
+                res.send(response);
+            }).catch((err) =>{
+                res.status(err.status).send(err.message);
         });  
     });
     
     app.post('/spots', (req, res) => {
+        
          let auth = req.headers.authorization;
-         let spot = req.body.spot;
-         
-         spots.createSpot(auth, spot).then((data) => {
-            res.send(data);
+         let spot = req.body.object;
+  
+        spots.createSpot(auth, spot).then((response) => {
+            
+            res.send(response);
             })
             .catch((err) => {
-             console.log(err);
-                res.status(err.statusCode).send(err.message);
+                res.status(err.status).send(err.message);
             });
-      
     });
     
     app.put('/spots/:id', (req, res) => {
@@ -44,13 +46,11 @@ module.exports = function(app) {
          let spot = req.body.spot;
          let id = req.params.id;
          
-         spots.updateSpot(auth, spot, id).then((data) => {
-             console.log(data);
-            res.send(data);
+         spots.updateSpot(auth, spot, id).then((response) => {
+            res.send(response);
             })
             .catch((err) => {
-             console.log(err);
-                res.status(err.statusCode).send(err.message);
+                res.status(err.status).send(err.message);
             });
       
     });
@@ -58,41 +58,51 @@ module.exports = function(app) {
     app.delete('/spots/:id', (req, res) => {
         let auth = req.headers.authorization
         let id = req.params.id;
-        spots.deleteSpot(auth, id).then((data) => {
-            res.send(data);
+        spots.deleteSpot(auth, id)
+            .then((response) => {
+            res.send(response);
             })
             .catch((err) => {
-                console.log(err);
-               res.status(err.statusCode).send(err.message);
+               res.status(err.status).send(err.message);
             });
     });
     
     // birds -------------------------------------------------------------
     app.get('/birds', (req, res)=> {
-        birds.readBirdsFromFile().then((birds) =>{
-             res.send(birds);
-        }).catch((error) =>{
-            res.status(500).send(err);
+        birds.getBirds().then((response) =>{
+            console.log("getBirds");
+             res.send(response);
+        }).catch((err) =>{
+            res.status(err.status).send(err.message);
         });
+    });
+    
+    app.post('/birds', (req, res) => {
+        let auth = req.headers.authorization;
+        let bird = req.body.object;
+         
+        birds.createBird(auth, bird).then((response) => {
+            console.log(response);
+            res.send(response);
+            })
+            .catch((err) => {
+            console.log(err);
+                res.status(err.status).send(err.message);
+            });
     });
     
     // returns token for restricted actions when user logs in -------------------------------------------------------------
     app.post('/login/:auth', (req, res) =>{
-        let auth = req.params.auth;
-        auth.getToken(auth).then((data) => {
-            res.send(data);
+        let credentials = req.params.auth;
+         login.getToken(credentials)
+            .then((response) => {
+            res.send(response);
             })
             .catch((err) => {
-               res.status(err.statusCode).send(err.message);
+               res.status(err.status).send(err.message);
             });
     });
 };
 
-/*birds.getBirds().then((data) => {
-            res.send(data);
-            })
-            .catch((err) => {
-                res.status(err.statusCode).send(err.message);
-            });*/
 
 

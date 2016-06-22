@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="birdSpotterApp" lang="en">
+<html ng-app="BirdSpotterApp" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Birdspotter</title>
@@ -8,8 +8,8 @@
     <meta name="author" content="Johanna Szepanski">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- Set base url to supprt url:s without hashes -->
-    <base href="/">
+    <!-- Set base url to support url:s without hashes -->
+    <base href="/index.html">
 
 
     <!-- CSS -->
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css" />
-
+    
     
     <!-- HTML5 elements in IE --> 
     <!--[if lt IE 9]>
@@ -25,23 +25,40 @@
     <![endif]-->
 </head>
 <body>
-    <!-- Partials --> 
-    <ng-view class="viewcontainer"></ng-view>
-
+    
+    <!-- Partials -->
+    <my-parent-directive>
+        <my-header></my-header>
+        <my-login></my-login>
+        <my-add-spot></my-add-spot>
+        <my-add-bird></my-add-bird>
+    </my-parent-directive>
+    
     <!-- CDN --> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-base64/angular-base64.js"></script>
+    <script src="/bower_components/ngGeolocation/ngGeolocation.min.js"></script>
     
     
     <!-- Application resources -->
     <script src="/app.js"></script>
-    <script src="/startController.js"></script>
-    <script src="/constantService.js"></script>
+    <script src="services/positionService.js"></script>
+    <script src="services/constantService.js"></script>
     <script src="services/apiService.js"></script>
-    <script src="services/cacheService.js"></script>
+    <script src="services/loginService.js"></script>
+    <script src="directives/parentDirective.js"></script>
+    <script src="controllers/headerDirective.js"></script>
+    <script src="directives/loginDirective.js"></script>
+    <script src="directives/addSpotDirective.js"></script>
+    <script src="directives/addBirdDirective.js"></script>
+    
+   
+    
 
 </body>
 </html>
