@@ -1,26 +1,31 @@
-<h1>LoginView</h1>
-<div class="col-md-4">
+<div class="col-md-4" data-ng-show="showLogin">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Logga in</h3>
+        <button data-ng-click="closeLogin()" class="btn btn-primary">Stäng</button>
     </div>
-    <p>{{user.errorMessage}}</p>
-      <div class="panel-body">
-       <form name="loginForm" class="simple-form" data-ng-submit="user.login(user.email, user.password)" required>
-         E-mail: <br />
-        <input type="email"  name="userEmail" data-ng-model="user.email" required/><br />
-        <div data-ng-messages="loginForm.userEmail.$error" data-ng-if="loginForm.userEmail.$dirty">
-            <div data-ng-message="required">E-post måste fyllas i</div>
-            <div data-ng-message="email">E-post är ogiltig</div>
-        </div>
-         
-           Password: <br />
-         <input type="password" name="userPassword" data-ng-model="user.password" data-ng-minlength="6" required/>           
-        <div data-ng-messages="loginForm.userPassword.$error" data-ng-if="loginForm.userPassword.$dirty">
-            <div data-ng-message="required">Lösenord måste fyllas i</div>
-            <div data-ng-message="minlength">Lösenord måste innehålla minst 6 tecken</div>
-        </div>    
-        <button>Logga in</button>
+    <p>{{error}}</p>
+      
+    <!-- Loginformulär --> 
+    <div class="panel-body">
+        <form name="loginForm" class="simple-form" data-ng-submit="login(email, password)" required>
+        
+            <!-- E-post -->     
+            <input type="email"  name="userEmail" data-ng-model="email" placeholder="E-post" required/><br />
+            <div data-ng-messages="loginForm.userEmail.$error" data-ng-if="loginForm.userEmail.$dirty">
+                <div data-ng-message="required">E-post måste fyllas i</div>
+                <div data-ng-message="email">E-post är ogiltig</div>
+            </div>
+
+            <!-- Lösenord --> 
+            <input type="password" name="userPassword" data-ng-model="password" data-ng-minlength="6" placeholder="Lösenord" required/>           
+            <div data-ng-messages="loginForm.userPassword.$error" data-ng-if="loginForm.userPassword.$dirty">
+                <div data-ng-message="required">Lösenord måste fyllas i</div>
+                <div data-ng-message="minlength">Lösenord måste innehålla minst 6 tecken</div>
+            </div>    
+
+            <!-- Submit --> 
+            <button>Logga in</button>
        </form>
     </div>
  </div>

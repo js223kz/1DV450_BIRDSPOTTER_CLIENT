@@ -9,14 +9,19 @@ const request = require('request'),
 
 module.exports = {
     getSpots(){             
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) =>{
             request({
-                url: url + path + apikey,
-                method: 'GET'
+                url: url + path,
+                method: 'GET',
+                qs:{
+                    key: apikey
+                }
             }, (error, response, body) =>{
-                if(error){
-                    reject(error)
-                } 
+                let res = JSON.parse(body);
+                
+                if(res.status !== 200){
+                    reject(res);
+                }
                 resolve(body);
             });
         });
@@ -45,26 +50,29 @@ module.exports = {
     },
     
     createSpot(auth, spot){
-        /*let lat = '&latitude=' + spot.latitude;
-        let lng = '&longitude=' + spot.longitude;
-        let bird= '&bird=' + spot.bird;
-        let birdspotter = '&birdspotter=' + spot.birdspotter;*/
-        
         return new Promise((resolve, reject) => {
-            request({
-                url: url + path + apikey,
+            let req = request({
+                url: url + path,
                 method: 'POST',
-                headers : {
-                    "Authorization" : auth,
-                    "Content-Type": 'application/json'
+                qs: {
+                    latitude: spot.latitude,
+                    longitude: spot.longitude,
+                    bird: spot.bird,
+                    birdspotter: spot.birdspotter,
+                    key: apikey
                 },
-                body: JSON.stringify({spot})
+                headers : {
+                    "Authorization" : 'Token token='+auth,
+                    "Content-Type": 'application/json'
+                }
                 
             }, (error, response, body) =>{
-                if(error){
-                    reject(error)
-                } 
-                resolve(body);
+                let res = JSON.parse(body);
+    
+                if(res.status !== 201){
+                    reject(res);
+                }
+                resolve(res);
             });
         });
     },
@@ -75,16 +83,19 @@ module.exports = {
                 url: url + path + '/' + id + apikey,
                 method: 'PUT',
                 headers : {
-                    "Authorization" : auth,
+                    "Authorization" :'Token token='+auth,
                     "Content-Type": 'application/json'
                 },
                 body: JSON.stringify({spot})
                 
             }, (error, response, body) =>{
-                if(error){
-                    reject(error)
-                } 
-                resolve(body);
+               
+                let res = JSON.parse(body);
+                 
+                if(body.status !== 200){
+                   reject(res);
+                }
+                resolve(res);
             });
         });
     },
@@ -101,10 +112,13 @@ module.exports = {
                     "Authorization" : auth
                 }
             }, (error, response, body) =>{
-                if(error){
-                    reject(error);
-                } 
-                resolve(body);
+                
+                let res = JSON.parse(body);
+                
+                if(res.status !== 204){
+                    reject(res);
+                }
+                resolve(res);
             });
         });
     }

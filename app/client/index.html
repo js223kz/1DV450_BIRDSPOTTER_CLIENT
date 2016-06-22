@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="birdSpotterApp" lang="en">
+<html ng-app="BirdSpotterApp" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Birdspotter</title>
@@ -25,18 +25,15 @@
     <![endif]-->
 </head>
 <body>
-     
-    <!-- Header should be visible on every page --> 
-    <header data-ng-controller="HeaderController as header">
-        <button data-ng-cloak data-ng-click="header.login()"> {{ $root.loggedInUser == undefined ? 'Logga in' : 'Logga ut' }}</button>
-        <button data-ng-show="$root.loggedInUser" data-ng-click="header.showAddSpotPanel()">Lägg till en spot</button>
-        <button class="btn btn-primary" data-ng-click="header.closeAddSpotPanel()">Stäng</button>
-        <div ng-if="header.showAddSpotView" ng-include="'partials/addSpotView.html'"></div>
-    </header>
     
-    <!-- Partials --> 
-    <ng-view class="mainView"></ng-view>
-
+    <!-- Partials -->
+    <my-parent-directive>
+        <my-header></my-header>
+        <my-login></my-login>
+        <my-add-spot></my-add-spot>
+        <my-add-bird></my-add-bird>
+    </my-parent-directive>
+    
     <!-- CDN --> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
@@ -45,19 +42,22 @@
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="/bower_components/angular-messages/angular-messages.js"></script>
     <script src="/bower_components/angular-base64/angular-base64.js"></script>
+    <script src="/bower_components/ngGeolocation/ngGeolocation.min.js"></script>
     
     
     <!-- Application resources -->
     <script src="/app.js"></script>
-    <script src="/startController.js"></script>
-    <script src="controllers/headerController.js"></script>
-    <script src="controllers/loginController.js"></script>
-    <script src="controllers/spotController.js"></script>
-    <script src="/constantService.js"></script>
-    <script src="services/apiService.js"></script>
-    <script src="services/cacheService.js"></script>
-    <script src="services/loginService.js"></script>
     <script src="services/positionService.js"></script>
+    <script src="services/constantService.js"></script>
+    <script src="services/apiService.js"></script>
+    <script src="services/loginService.js"></script>
+    <script src="directives/parentDirective.js"></script>
+    <script src="controllers/headerDirective.js"></script>
+    <script src="directives/loginDirective.js"></script>
+    <script src="directives/addSpotDirective.js"></script>
+    <script src="directives/addBirdDirective.js"></script>
+    
+   
     
 
 </body>

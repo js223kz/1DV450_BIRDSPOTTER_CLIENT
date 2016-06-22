@@ -1,41 +1,63 @@
-"use strict";
-angular.module('birdSpotterApp')
-     .factory('ApiService', ['constants', '$q', '$http', apiService]);  
-   
-    function apiService(constants, $q, $http){
-         let deferred = $q.defer();
+'use strict';
+
+(function(){
+    angular.module('BirdSpotterApp').factory('ApiService', ApiService)
+    
+    ApiService.$inject = ['Constants', '$q', '$http']
+    
+    function ApiService(Constants, $q, $http){
+        
         return{
-                getCollection: getCollection,
-            };
+            getCollection: function(url){
+                return $http({
+                    method: 'GET',
+                    url: url,
+                    headers: {}
+                })
+                .then(this.saveCollection)
+                .catch(this.responseError);
 
-        function getCollection(url){
-            return $http({
-                method: 'GET',
-                url: url,
-                headers: {}
-            })
-            .then(saveCollection)
-            .catch(responseError);
-
-        }
-
-         function saveCollection(response){
-            let collection = undefined;
+            },
             
-             if(response.data.hasOwnProperty('birds')){
-                collection = JSON.stringify(response.data.birds);
-                sessionStorage.setItem(constants.BIRDS_STORAGE, collection);
-                deferred.resolve();
-            }else{
-                collection = JSON.stringify(response.data.spots);
-                sessionStorage.setItem(constants.SPOTS_STORAGE, collection);
-                deferred.resolve();
-            }
-            return deferred.promise;
-        }
+            saveCollection: function(response){
+                let collection = undefined;
+            
+                if(response.data.hasOwnProperty('birds')){
+                    collection = JSON.stringify(response.data.birds);
 
-        function responseError(response){
-            //check which kind of response status
-            return $q.reject('Kan inte hämta trafikinformation.' + response.status);
+                    sessionStorage.setItem(Constants.BIRDS_STORAGE, collection);
+                    return $q.resolve();
+                }else{
+                    collection = JSON.stringify(response.data.spots);
+                    sessionStorage.setItem(Constants.SPOTS_STORAGE, collection);
+                    return $q.resolve();
+                }
+            },
+            
+            saveItem: function(object, token, url){
+                return $http({
+                method: 'POST',
+                url: url,
+                headers: {
+                    "Authorization" : token,
+                    "Content-Type": 'application/json'
+                },
+                data: { object: object }
+            })
+            .then(this.responseSuccess)
+            .catch(this.responseError);
+
+            },
+            
+            responseError: function(error){
+                return $q.reject(error.data);
+            },
+            
+            responseSuccess: function(response){
+                console.log(response.data.message);
+                return $q.resolve(response.data.message);
+            }
         }
-    }
+    }      
+})();
+

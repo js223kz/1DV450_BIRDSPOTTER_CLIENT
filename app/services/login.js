@@ -15,11 +15,10 @@ module.exports = {
                     'Authorization': 'Basic ' + credentials
                 }
             }, (error, response, body) =>{
-                if(error){
-                    reject(error);
-                } 
-                if(response.statusCode !== 200){
-                     reject({statusCode: response.statusCode, message: body});
+                let res = JSON.parse(body);
+                
+                if(res.status !== 200){
+                    reject(res);
                 }
                 resolve(body);
             });
@@ -27,4 +26,3 @@ module.exports = {
     },
     
 };
-

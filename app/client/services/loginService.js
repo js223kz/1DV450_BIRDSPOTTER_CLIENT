@@ -1,40 +1,43 @@
-"use strict";
-angular.module('birdSpotterApp')
-     .factory('LoginService', ['constants', '$q', '$http', '$base64','$window', '$location', loginService]);  
-   
-    function loginService(constants, $q, $http, $base64, $window, $location){
-        let deferred = $q.defer();
-        //$rootScope.loggedInUser = null;
+'use strict';
+
+(function(){
+    angular.module('BirdSpotterApp').factory('LoginService', LoginService)
+    
+    LoginService.$inject = ['Constants', '$q', '$http', '$base64']
+    
+    function LoginService(Constants, $q, $http, $base64){
         
-        function tryToLogin(email, pwd){
-            let credentials = $base64.encode(email+':'+ pwd);
-            return $http({
-                method: 'POST',
-                url: constants.LOGIN_URL + credentials,
-                headers: {}
-            })
-            .then(successfulLogin)
-            .catch(failedLogin);
+        return{
+            tryToLogin: function(email, pwd){
+                let credentials = $base64.encode(email+':'+ pwd);
+                return $http({
+                    method: 'POST',
+                    url: Constants.LOGIN_URL + credentials,
+                    headers: {}
+                })
+                .then(this.successfulLogin)
+                .catch(this.failedLogin);
+
+            },
             
+            successfulLogin: function(response){
+                let user = {
+                    token: response.data.token,
+                    id: response.data.id,
+                    username: response.data.username,
+                    email: response.data.email
+                }
+                sessionStorage.setItem(Constants.USER_STORAGE, JSON.stringify(user));
+                return $q.resolve();
+            },
+
+            failedLogin: function(response){
+                return $q.reject(response.data);
+            },
+
+            logout: function(){
+                sessionStorage.removeItem(Constants.USER_STORAGE);
+            }
         }
-        
-        function successfulLogin(response){
-            $window.sessionStorage.setItem(constants.USER_STORAGE, JSON.stringify(response));
-            $location.path(constants.HOME_PATH);
-        }
-        
-        function failedLogin(response){
-            deferred.reject(response);
-            return deferred.promise;
-        }
-        
-        function logout(){
-            $window.sessionStorage.removeItem(constants.USER_STORAGE);
-            $window.location.href = constants.HOME_PATH;
-        }
-        
-         return{
-            tryToLogin: tryToLogin,
-            logout: logout
-        };
-    }
+    }      
+})();
