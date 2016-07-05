@@ -12,13 +12,23 @@
             link: function(scope, elem, attrs){
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
-                scope.dropDown = null;
                 scope.success = null;
                 scope.error = scope.errorMessage;
+                
+                
+                scope.resetForm = (()=>{
+                    scope.birdName = "";
+                    scope.latinName = "";
+                    scope.regularity = "";
+                    scope.success = null;
+                    scope.addNewBirdForm.$setPristine();
+                });
+                
                 
                 scope.closeAddBirdView = (() =>{
                     scope.showAddSpot= true;
                     scope.showAddBird = false;
+                    scope.resetForm();
                 });
                 
                 //update value to hide and show error message properly
@@ -54,6 +64,8 @@
                 scope.successMessage = ((message)=>{
                     scope.success = message;
                 });
+                
+                
             },
         }
      }

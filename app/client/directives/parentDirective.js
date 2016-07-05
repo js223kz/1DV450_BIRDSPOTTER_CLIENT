@@ -10,43 +10,43 @@
             restrict: 'E',
             scope: true,
             priority: 1000,
-            controller: function($scope) {
-            $scope.showLogin = false;
-            $scope.showAddSpot = false;
-            $scope.showAddBird = false;
-            $scope.userPosition = null;
-            $scope.birdList =  JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
-            $scope.error = null;
-            
-           
-            if(sessionStorage.getItem(Constants.USER_STORAGE) === null){
-                $scope.loggedIn = false;
-            }else{
-                $scope.loggedIn = true;
-            }
-                
-             $scope.updateBirdlist = (()=>{
-                ApiService.getCollection(Constants.BIRDS_URL)
-                .then($scope.setBirdList)
-                .catch($scope.errorMessage);
+            controller: (($scope)=>{
+                $scope.showLogin = false;
+                $scope.showAddSpot = false;
+                $scope.showAddBird = false;
+                $scope.userPosition = null;
+                $scope.birdList =  null;
+                $scope.error = null;
 
-            });
-                
-            $scope.setBirdList = (()=>{
-                $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
-                return $q.resolve($scope.birdList);
-            });
-                
-            $scope.errorMessage = ((error)=>{
-                return $scope.error = error;
-            });
-            
-                
-            $scope.setUserPosition = function(position){
-                    $scope.userPosition = position;
-                    $scope.showAddSpot = true;
-            }
-         },
+
+                if(sessionStorage.getItem(Constants.USER_STORAGE) === null){
+                    $scope.loggedIn = false;
+                }else{
+                    $scope.loggedIn = true;
+                }
+
+                 $scope.updateBirdlist = (()=>{
+                    ApiService.getCollection(Constants.BIRDS_URL)
+                    .then($scope.setBirdList)
+                    .catch($scope.errorMessage);
+
+                });
+
+                $scope.setBirdList = (()=>{
+                    $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                    return $q.resolve($scope.birdList);
+                });
+
+                $scope.errorMessage = ((error)=>{
+                    return $scope.error = error;
+                });
+
+
+                $scope.setUserPosition = ((position)=>{
+                        $scope.userPosition = position;
+                        $scope.showAddSpot = true;
+                });
+         }),
           link: {
               pre: function(scope,elem,attr){
                 
