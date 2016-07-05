@@ -20,7 +20,6 @@
                     scope.birdName = "";
                     scope.latinName = "";
                     scope.regularity = "";
-                    scope.success = null;
                     scope.addNewBirdForm.$setPristine();
                 });
                 
@@ -28,11 +27,16 @@
                 scope.closeAddBirdView = (() =>{
                     scope.showAddSpot= true;
                     scope.showAddBird = false;
+                    scope.success = "";
                     scope.resetForm();
                 });
                 
                 //update value to hide and show error message properly
                 scope.updateDropdownValue = (() =>{ 
+                    
+                    //clears success message if user starts adding another new bird
+                    scope.success = "";
+                    
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
@@ -55,9 +59,10 @@
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
                         .then(scope.successMessage)
                         .then(scope.updateBirdlist)
+                        .then(scope.resetForm)
                         
                         //error message function in parent directive
-                        .catch(scope.errorMessage)
+                        .catch(scope.errorMessage);
                     }
                 });
                 
