@@ -1,5 +1,4 @@
-
-    <!-- add a new bird that doesn't exist in list --> 
+   <!-- add a new bird that doesn't exist in list --> 
 <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
     <div class="panel panel-primary" data-ng-cloak  data-ng-show="showAddBird">
         <div class="panel-heading">
@@ -14,7 +13,7 @@
                 <div data-ng-messages="addNewBirdForm.swedishBirdName.$error" data-ng-if="addNewBirdForm.swedishBirdName.$dirty">
                     <div data-ng-message="required">Fågelns namn måste anges.</div>
                 </div>
-                <input name="latinBirdName" class="form-control" type="text" data-ng-model="latinName" placeholder="Fågelns latinska namn namn" required>
+                <input name="latinBirdName" class="form-control" type="text" data-ng-model="latinName" placeholder="Fågelns latinska namn" required>
                 <div data-ng-messages="addNewBirdForm.latinBirdName.$error" data-ng-if="addNewBirdForm.latinBirdName.$dirty">
                     <div data-ng-message="required">Fågelns latinska namn måste anges.</div>
                 </div>
@@ -27,4 +26,3 @@
         </div>
     </div>
 </div>
-

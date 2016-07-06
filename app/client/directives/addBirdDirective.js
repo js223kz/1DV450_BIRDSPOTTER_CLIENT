@@ -13,6 +13,7 @@
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
                 scope.success = null;
+                //scope.dropDown = null;
                 scope.error = scope.errorMessage;
                 
                 
@@ -22,7 +23,7 @@
                     scope.regularity = "";
                     scope.addNewBirdForm.$setPristine();
                 });
-                
+
                 
                 scope.closeAddBirdView = (() =>{
                     scope.showAddSpot= true;
@@ -32,17 +33,14 @@
                 });
                 
                 //update value to hide and show error message properly
-                scope.updateDropdownValue = (() =>{ 
-                    
-                    //clears success message if user starts adding another new bird
-                    scope.success = "";
+                /*scope.updateDropdownValue = (() =>{ 
                     
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
                          scope.regularityNotValid = false;
                     }
-                });
+                });*/
                 
                 scope.saveBird = (() =>{
                     
