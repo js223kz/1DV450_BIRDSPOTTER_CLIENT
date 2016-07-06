@@ -14,7 +14,7 @@
                 scope.query = null;
                 scope.showSearchResult = false;
                 scope.selectedBirds = [];
-                scope.birds = scope.birdList;
+                
                 scope.success = null;
                 let userPosition = undefined;
                 
@@ -23,10 +23,13 @@
                 }
                 
                 scope.updateSearchValue = function(){
+                    //scope.birds = scope.birdList;
                     if(scope.query.length > 0){
                         scope.showSearchResult = true;
+                        console.log("longer");
                     }else{
                        scope.showSearchResult = false;
+                        console.log("shorter");
                     }
                 }
                
@@ -38,6 +41,7 @@
                 scope.addNewBirdToList = function(){
                     scope.showAddSpot= false;
                     scope.showAddBird = true;
+                    scope.query = "";
                 }
                 
                 scope.successMessage = ((message)=>{

@@ -35,33 +35,7 @@ angular.module('birdSpotterApp')
             vm.errorMessage = undefined;
             vm.userPosition = pos.coords; 
         }
-        
-        PositionService.getCurrentPosition()
-                .then(setCurrentPosition)
-                .catch(showErrorMessage); 
-                    
-        vm.regex = function(value){
-            return '/^' + value + '/';
-        }
 
-        vm.updateSearchValue = function(){
-            if(vm.query.length > 0){
-                vm.showSearchResult = true;
-            }else{
-               vm.showSearchResult = false; 
-            }
-        }
-
-        vm.addNewBirdToList = function(){
-            vm.showAddSpotPanel = false;
-            vm.showAddNewBirdPanel = true;
-            vm.regularities = constants.REGULARITIES;
-        }
-
-        vm.addBirdToSpot = function(bird){
-            vm.selectedBirds.push({name: bird.birdName, id: bird.id});
-        }
-        
         vm.addSpot = function(){
             let birds = [];
             if(vm.userPosition === undefined){

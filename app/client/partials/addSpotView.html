@@ -31,7 +31,7 @@
 
          <!-- SearchResult --> 
         <div data-ng-show="showSearchResult" class="search-results">                
-            <ul class="birds" ng-repeat="bird in birds | filter: query | orderBy: 'birdName' ">
+            <ul class="birds" ng-repeat="bird in birdList | filter: query | orderBy: 'birdName' ">
                 <li>
                     {{bird.birdName}} 
                     <button data-ng-click="addBirdToSpot(bird)">Lägg till</button>

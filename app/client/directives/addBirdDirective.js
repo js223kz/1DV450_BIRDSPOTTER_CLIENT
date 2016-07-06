@@ -12,23 +12,35 @@
             link: function(scope, elem, attrs){
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
-                scope.dropDown = null;
                 scope.success = null;
+                //scope.dropDown = null;
                 scope.error = scope.errorMessage;
+                
+                
+                scope.resetForm = (()=>{
+                    scope.birdName = "";
+                    scope.latinName = "";
+                    scope.regularity = "";
+                    scope.addNewBirdForm.$setPristine();
+                });
+
                 
                 scope.closeAddBirdView = (() =>{
                     scope.showAddSpot= true;
                     scope.showAddBird = false;
+                    scope.success = "";
+                    scope.resetForm();
                 });
                 
                 //update value to hide and show error message properly
-                scope.updateDropdownValue = (() =>{ 
+                /*scope.updateDropdownValue = (() =>{ 
+                    
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
                          scope.regularityNotValid = false;
                     }
-                });
+                });*/
                 
                 scope.saveBird = (() =>{
                     
@@ -45,15 +57,18 @@
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
                         .then(scope.successMessage)
                         .then(scope.updateBirdlist)
+                        .then(scope.resetForm)
                         
                         //error message function in parent directive
-                        .catch(scope.errorMessage)
+                        .catch(scope.errorMessage);
                     }
                 });
                 
                 scope.successMessage = ((message)=>{
                     scope.success = message;
                 });
+                
+                
             },
         }
      }
