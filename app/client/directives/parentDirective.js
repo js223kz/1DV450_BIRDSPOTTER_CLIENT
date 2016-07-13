@@ -16,6 +16,7 @@
                 $scope.showAddBird = false;
                 $scope.userPosition = null;
                 $scope.birdList =  null;
+                $scope.spotList = null;
                 $scope.error = null;
 
 
@@ -25,18 +26,27 @@
                     $scope.loggedIn = true;
                 }
 
-                 $scope.updateBirdlist = (()=>{
-                    ApiService.getCollection(Constants.BIRDS_URL)
-                    .then($scope.setBirdList)
+                $scope.updateList = ((url)=>{
+                    ApiService.getCollection(url)
+                    .then(()=>{
+                        $scope.setList(url);
+                    })
                     .catch($scope.errorMessage);
 
                 });
-
-                $scope.setBirdList = (()=>{
-                    $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
-                    return $q.resolve($scope.birdList);
+                
+                $scope.setList = ((url)=>{
+                    if(url === Constants.BIRDS_URL){
+                        console.log("set birds")
+                        $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                    }else{
+                        console.log("set spot");
+                        $scope.spotList = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
+                        console.log($scope.spotList);
+                    }
                 });
 
+                
                 $scope.errorMessage = ((error)=>{
                     return $scope.error = error;
                 });
@@ -49,11 +59,9 @@
          }),
           link: {
               pre: function(scope,elem,attr){
-                
-                ApiService.getCollection(Constants.BIRDS_URL)
-                    .then(ApiService.getCollection(Constants.SPOTS_URL))
-                    .then(scope.setBirdList)
-                    .catch(scope.errorMessage);
+                  
+                  scope.updateList(Constants.BIRDS_URL);
+                  scope.updateList(Constants.SPOTS_URL);
             }
         }
     }

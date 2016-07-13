@@ -13,7 +13,6 @@
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
                 scope.success = null;
-                //scope.dropDown = null;
                 scope.error = scope.errorMessage;
                 
                 
@@ -31,17 +30,7 @@
                     scope.success = "";
                     scope.resetForm();
                 });
-                
-                //update value to hide and show error message properly
-                /*scope.updateDropdownValue = (() =>{ 
-                    
-                    if(scope.regularity === null){
-                        scope.regularityNotValid = true;
-                    }else{
-                         scope.regularityNotValid = false;
-                    }
-                });*/
-                
+         
                 scope.saveBird = (() =>{
                     
                     if(scope.regularity === null){
@@ -56,7 +45,7 @@
                                                 
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
                         .then(scope.successMessage)
-                        .then(scope.updateBirdlist)
+                        .then(scope.updateList(Constants.BIRDS_URL))
                         .then(scope.resetForm)
                         
                         //error message function in parent directive

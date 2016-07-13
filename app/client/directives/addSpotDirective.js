@@ -23,13 +23,10 @@
                 }
                 
                 scope.updateSearchValue = function(){
-                    //scope.birds = scope.birdList;
                     if(scope.query.length > 0){
                         scope.showSearchResult = true;
-                        console.log("longer");
                     }else{
                        scope.showSearchResult = false;
-                        console.log("shorter");
                     }
                 }
                
@@ -47,6 +44,10 @@
                 scope.successMessage = ((message)=>{
                     scope.selectedBirds = [];
                     scope.success = message;
+                });
+                
+                scope.resetForm = (()=>{
+                    scope.selectedBirds = [];
                 });
                 
                 scope.saveSpot = (()=>{
@@ -82,9 +83,12 @@
                         
                         ApiService.saveItem(spot, auth.token, Constants.SPOTS_URL)
                         .then(scope.successMessage)
+                        .then(scope.updateList(Constants.SPOTS_URL))
+                        .then(scope.resetForm)
+                        
+                        //error message function in parent directive
                         .catch(scope.errorMessage);
-                        }
-
+                    }
                 });
 
                 scope.closeAddSpotView = function(){

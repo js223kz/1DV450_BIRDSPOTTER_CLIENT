@@ -16,21 +16,33 @@
                 })
                 .then(this.saveCollection)
                 .catch(this.responseError);
-
             },
             
             saveCollection: function(response){
                 let collection = undefined;
+                let deferred = $q.defer();
             
                 if(response.data.hasOwnProperty('birds')){
                     collection = JSON.stringify(response.data.birds);
-
+                    console.log("save birds collection");
                     sessionStorage.setItem(Constants.BIRDS_STORAGE, collection);
-                    return $q.resolve();
+                    deferred.resolve();
                 }else{
                     collection = JSON.stringify(response.data.spots);
                     sessionStorage.setItem(Constants.SPOTS_STORAGE, collection);
-                    return $q.resolve();
+                    deferred.resolve();
+                }
+                return deferred.Promise;
+            },
+            
+            getList: function(url){
+                let list = null;
+                 if(url === Constants.BIRDS_URL){
+                        list = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                        return $q.resolve(list);
+                }else{
+                        list = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
+                        return $q.resolve(list);
                 }
             },
             
@@ -54,7 +66,6 @@
             },
             
             responseSuccess: function(response){
-                console.log(response.data.message);
                 return $q.resolve(response.data.message);
             }
         }
