@@ -67,6 +67,11 @@
             
             responseSuccess: function(response){
                 return $q.resolve(response.data.message);
+            },
+            
+            //user saved in loginService.js
+            getUser: function(){
+                return JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
             }
         }
     }      

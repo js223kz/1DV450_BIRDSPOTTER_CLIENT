@@ -11,9 +11,11 @@
             scope: true,
             priority: 1000,
             controller: (($scope)=>{
-                $scope.showLogin = false;
-                $scope.showAddSpot = false;
-                $scope.showAddBird = false;
+                $scope.showLoginView = false;
+                $scope.showAddSpotView = false;
+                $scope.showAddBirdView = false;
+                $scope.showAccountView = false;
+                
                 $scope.userPosition = null;
                 $scope.birdList =  null;
                 $scope.spotList = null;
@@ -37,10 +39,15 @@
                 
                 $scope.setList = ((url)=>{
                     if(url === Constants.BIRDS_URL){
-                        $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                        ApiService.getList(url).then((list)=>{
+                            $scope.birdList = list;
+                            console.log($scope.birdList);
+                        })
                     }else{
-                        $scope.spotList = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
-                        console.log($scope.spotList);
+                        ApiService.getList(url).then((list)=>{
+                            $scope.spotList = list;
+                            console.log($scope.spotList);
+                        })
                     }
                 });
 
@@ -52,7 +59,7 @@
 
                 $scope.setUserPosition = ((position)=>{
                         $scope.userPosition = position;
-                        $scope.showAddSpot = true;
+                        $scope.showAddSpotView = true;
                 });
          }),
           link: {

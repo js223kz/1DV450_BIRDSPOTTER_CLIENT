@@ -41,8 +41,8 @@
                 
                 //opens a new form to add a new bird to list
                 scope.addNewBirdToList = function(){
-                    scope.showAddSpot= false;
-                    scope.showAddBird = true;
+                    scope.showAddSpotView = false;
+                    scope.showAddBirdView = true;
                     scope.query = "";
                     scope.success = "";
                 }
@@ -98,12 +98,12 @@
                     }
                 });
 
-                scope.closeAddSpotView = function(){
+                scope.closeAddSpotView = (()=>{
                     scope.resetSpotForm();
-                    scope.showAddSpot = false;
-                }
-                
-           },
+                    scope.showAddSpotView = false;
+                });
+                   
+            }
         }
      }
     

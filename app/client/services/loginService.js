@@ -37,7 +37,9 @@
 
             logout: function(){
                 sessionStorage.removeItem(Constants.USER_STORAGE);
-            }
+            },
+            
+            
         }
     }      
 })();

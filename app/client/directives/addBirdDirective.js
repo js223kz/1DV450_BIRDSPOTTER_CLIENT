@@ -25,8 +25,8 @@
 
                 
                 scope.closeAddBirdView = (() =>{
-                    scope.showAddSpot= true;
-                    scope.showAddBird = false;
+                    scope.showAddSpotView = true;
+                    scope.showAddBirdView = false;
                     scope.success = "";
                     scope.resetBirdForm();
                 });

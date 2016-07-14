@@ -13,7 +13,7 @@
         link: function(scope) {
             
             scope.closeLogin = function(){
-              scope.showLogin = false;
+              scope.showLoginView = false;
             };
             
             scope.login = function(email, pwd){
