@@ -16,7 +16,7 @@
                 scope.error = scope.errorMessage;
                 
                 
-                scope.resetForm = (()=>{
+                scope.resetBirdForm = (()=>{
                     scope.birdName = "";
                     scope.latinName = "";
                     scope.regularity = "";
@@ -28,7 +28,7 @@
                     scope.showAddSpot= true;
                     scope.showAddBird = false;
                     scope.success = "";
-                    scope.resetForm();
+                    scope.resetBirdForm();
                 });
          
                 scope.saveBird = (() =>{
@@ -44,16 +44,17 @@
                         }
                                                 
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
-                        .then(scope.successMessage)
+                        .then(scope.birdSavedMessage)
+                        .then(scope.resetBirdForm)
                         .then(scope.updateList(Constants.BIRDS_URL))
-                        .then(scope.resetForm)
+                       
                         
                         //error message function in parent directive
                         .catch(scope.errorMessage);
                     }
                 });
                 
-                scope.successMessage = ((message)=>{
+                scope.birdSavedMessage = ((message)=>{
                     scope.success = message;
                 });
                 

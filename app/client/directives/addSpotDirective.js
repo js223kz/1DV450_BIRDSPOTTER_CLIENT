@@ -23,6 +23,11 @@
                 }
                 
                 scope.updateSearchValue = function(){
+                    //if one spot is successfully saved
+                    //hide success message when user wants 
+                    //to add a new spot
+                    scope.success = "";
+                    
                     if(scope.query.length > 0){
                         scope.showSearchResult = true;
                     }else{
@@ -39,16 +44,18 @@
                     scope.showAddSpot= false;
                     scope.showAddBird = true;
                     scope.query = "";
+                    scope.success = "";
                 }
                 
-                scope.successMessage = ((message)=>{
-                    scope.selectedBirds = [];
+                scope.spotSavedMessage = ((message)=>{
                     scope.success = message;
+                    
                 });
-                
-                scope.resetForm = (()=>{
+                scope.resetSpotForm = (()=>{
                     scope.selectedBirds = [];
+                    scope.query = null;
                 });
+
                 
                 scope.saveSpot = (()=>{
                     let birds = [];
@@ -82,9 +89,9 @@
                         }
                         
                         ApiService.saveItem(spot, auth.token, Constants.SPOTS_URL)
-                        .then(scope.successMessage)
+                        .then(scope.spotSavedMessage)
+                        .then(scope.resetSpotForm)
                         .then(scope.updateList(Constants.SPOTS_URL))
-                        .then(scope.resetForm)
                         
                         //error message function in parent directive
                         .catch(scope.errorMessage);
@@ -92,8 +99,7 @@
                 });
 
                 scope.closeAddSpotView = function(){
-                    scope.selectedBirds = [];
-                    scope.query = null;
+                    scope.resetSpotForm();
                     scope.showAddSpot = false;
                 }
                 

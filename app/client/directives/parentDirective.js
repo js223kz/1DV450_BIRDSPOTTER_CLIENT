@@ -37,10 +37,8 @@
                 
                 $scope.setList = ((url)=>{
                     if(url === Constants.BIRDS_URL){
-                        console.log("set birds")
                         $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
                     }else{
-                        console.log("set spot");
                         $scope.spotList = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
                         console.log($scope.spotList);
                     }

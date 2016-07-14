@@ -12,22 +12,26 @@
             require: '^myParentDirective',
             link: function(scope) {
 
-                scope.showLoginView = function(){
+                scope.showLoginView = (()=>{
                     scope.showLogin = true;
-                };
-                
-                scope.logout = function(){
+                });
+                                   
+                scope.logout = (()=>{
                     LoginService.logout();
                     scope.loggedIn = false;
-                };
-                
-                scope.showAddSpotView = function(){
+                });
+
+                scope.showAddSpotView = (()=>{
                     PositionService.getUserPosition()
                     
                         //functions in parent directive
                         .then(scope.setUserPosition)
                         .catch(scope.errorMessage);
-                };
+                });
+                                    
+                scope.showAccountView = (()=>{
+                    console.log("klickade account");
+                });
             }
         }
      }   
