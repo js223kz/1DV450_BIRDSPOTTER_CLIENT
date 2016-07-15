@@ -1,0 +1,29 @@
+<section data-ng-show="showAccountView" class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <div class="panel panel-primary" data-ng-cloak>
+        <div class="panel-heading">
+            <h3 class="panel-title">Konto {{user.username}}</h3>
+            <button class="btn btn-primary" data-ng-click="closeAccountPanel()">Stäng</button>
+        </div>
+        <div class="panel-body">
+            <span>{{success}}</span>
+            
+            <!-- user spots list --> 
+        
+            <div>                
+                <ul ng-repeat="spot in spotList | filter:{birdspotterId: user.id}">
+                    <li>
+                        {{spot.id}} {{spot.createdAt}} 
+                        <ul>
+                        <li ng-repeat="bird in spot.birds">
+                            {{bird.birdName}} 
+                        </li>
+                        </ul>
+                    </li>
+                    <button data-ng-click="deleteSpot(spot.id)">Radera</button>
+                </ul>
+            </div>
+
+            
+        </div>
+    </div>
+</section>

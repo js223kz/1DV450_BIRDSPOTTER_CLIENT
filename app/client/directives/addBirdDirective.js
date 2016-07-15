@@ -13,11 +13,10 @@
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
                 scope.success = null;
-                //scope.dropDown = null;
                 scope.error = scope.errorMessage;
                 
                 
-                scope.resetForm = (()=>{
+                scope.resetBirdForm = (()=>{
                     scope.birdName = "";
                     scope.latinName = "";
                     scope.regularity = "";
@@ -26,28 +25,18 @@
 
                 
                 scope.closeAddBirdView = (() =>{
-                    scope.showAddSpot= true;
-                    scope.showAddBird = false;
+                    scope.showAddSpotView = true;
+                    scope.showAddBirdView = false;
                     scope.success = "";
-                    scope.resetForm();
+                    scope.resetBirdForm();
                 });
-                
-                //update value to hide and show error message properly
-                /*scope.updateDropdownValue = (() =>{ 
-                    
-                    if(scope.regularity === null){
-                        scope.regularityNotValid = true;
-                    }else{
-                         scope.regularityNotValid = false;
-                    }
-                });*/
-                
+         
                 scope.saveBird = (() =>{
                     
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
-                        let auth = JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+                        let auth = ApiService.getUser();
                         let bird = {
                             name: scope.birdName,
                             latin: scope.latinName,
@@ -55,16 +44,17 @@
                         }
                                                 
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
-                        .then(scope.successMessage)
-                        .then(scope.updateBirdlist)
-                        .then(scope.resetForm)
+                        .then(scope.birdSavedMessage)
+                        .then(scope.resetBirdForm)
+                        .then(scope.updateList(Constants.BIRDS_URL))
+                       
                         
                         //error message function in parent directive
                         .catch(scope.errorMessage);
                     }
                 });
                 
-                scope.successMessage = ((message)=>{
+                scope.birdSavedMessage = ((message)=>{
                     scope.success = message;
                 });
                 

@@ -26,28 +26,7 @@ module.exports = {
             });
         });
     },
-    
-    saveSpotsToFile(spots){
-        return new Promise((resolve, reject) =>{
-            fs.writeFile("./files/spots.json", spots,(error) =>{
-                if(error) {
-                    reject("Error when saving spots to file: " + error);
-                }
-                resolve();
-            }); 
-        });
-    },
-    
-    readSpotsFromFile(){
-        return new Promise((resolve, reject) =>{
-            fs.readFile("./files/spots.json", (error, data) =>{
-                if(error) {
-                    reject("Error when reading spots from file: " + error);
-                }
-                resolve(data);
-            }); 
-        });
-    },
+
     
     createSpot(auth, spot){
         return new Promise((resolve, reject) => {
@@ -101,19 +80,20 @@ module.exports = {
     },
     
     deleteSpot(auth, id){
-       
-        let path = '/api/v1/spots/' + id + process.env.API_KEY;
-        
         return new Promise((resolve, reject) => {
             request({
-                url: url + path,
+                url: url + path + "/" + id,
                 method: 'DELETE',
+                qs: {
+                    key: apikey
+                },
                 headers : {
-                    "Authorization" : auth
+                    "Authorization" : 'Token token='+auth,
+                    "Content-Type": 'application/json'
                 }
             }, (error, response, body) =>{
-                
-                let res = JSON.parse(body);
+               
+               let res = JSON.parse(body);
                 
                 if(res.status !== 204){
                     reject(res);

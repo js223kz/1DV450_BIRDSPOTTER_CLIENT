@@ -11,11 +11,14 @@
             scope: true,
             priority: 1000,
             controller: (($scope)=>{
-                $scope.showLogin = false;
-                $scope.showAddSpot = false;
-                $scope.showAddBird = false;
+                $scope.showLoginView = false;
+                $scope.showAddSpotView = false;
+                $scope.showAddBirdView = false;
+                $scope.showAccountView = false;
+                
                 $scope.userPosition = null;
                 $scope.birdList =  null;
+                $scope.spotList = null;
                 $scope.error = null;
 
 
@@ -25,18 +28,30 @@
                     $scope.loggedIn = true;
                 }
 
-                 $scope.updateBirdlist = (()=>{
-                    ApiService.getCollection(Constants.BIRDS_URL)
-                    .then($scope.setBirdList)
+                $scope.updateList = ((url)=>{
+                    ApiService.getCollection(url)
+                    .then(()=>{
+                        $scope.setList(url);
+                    })
                     .catch($scope.errorMessage);
 
                 });
-
-                $scope.setBirdList = (()=>{
-                    $scope.birdList = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
-                    return $q.resolve($scope.birdList);
+                
+                $scope.setList = ((url)=>{
+                    if(url === Constants.BIRDS_URL){
+                        ApiService.getList(url).then((list)=>{
+                            $scope.birdList = list;
+                            console.log($scope.birdList);
+                        })
+                    }else{
+                        ApiService.getList(url).then((list)=>{
+                            $scope.spotList = list;
+                            console.log($scope.spotList);
+                        })
+                    }
                 });
 
+                
                 $scope.errorMessage = ((error)=>{
                     return $scope.error = error;
                 });
@@ -44,16 +59,14 @@
 
                 $scope.setUserPosition = ((position)=>{
                         $scope.userPosition = position;
-                        $scope.showAddSpot = true;
+                        $scope.showAddSpotView = true;
                 });
          }),
           link: {
               pre: function(scope,elem,attr){
-                
-                ApiService.getCollection(Constants.BIRDS_URL)
-                    .then(ApiService.getCollection(Constants.SPOTS_URL))
-                    .then(scope.setBirdList)
-                    .catch(scope.errorMessage);
+                  
+                  scope.updateList(Constants.BIRDS_URL);
+                  scope.updateList(Constants.SPOTS_URL);
             }
         }
     }
