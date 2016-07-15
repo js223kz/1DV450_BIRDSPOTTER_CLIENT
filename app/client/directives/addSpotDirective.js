@@ -59,7 +59,7 @@
                 
                 scope.saveSpot = (()=>{
                     let birds = [];
-                    let auth = JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+                    let auth = ApiService.getUser();
                     let errorMessage = 'Du måste godkänna att vi får använda din position.'+
                         'Utan den går det inte att registrera en ny birdspot.'
                     

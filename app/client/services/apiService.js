@@ -48,17 +48,31 @@
             
             saveItem: function(object, token, url){
                 return $http({
-                method: 'POST',
-                url: url,
-                headers: {
-                    "Authorization" : token,
-                    "Content-Type": 'application/json'
-                },
-                data: { object: object }
-            })
+                    method: 'POST',
+                    url: url,
+                    headers: {
+                        "Authorization" : token,
+                        "Content-Type": 'application/json'
+                    },
+                    data: { object: object }
+                })
+                .then(this.responseSuccess)
+                .catch(this.responseError);
+
+            },
+            
+            deleteSpot: function(spotId, user){
+                
+                return $http({
+                    method: 'DELETE',
+                    url: Constants.SPOTS_URL + "/" + spotId,
+                    headers: {
+                        "Authorization" : user.token,
+                        "Content-Type": 'application/json'
+                    }
+                })
             .then(this.responseSuccess)
             .catch(this.responseError);
-
             },
             
             responseError: function(error){
@@ -66,6 +80,7 @@
             },
             
             responseSuccess: function(response){
+                console.log(response.data.message);
                 return $q.resolve(response.data.message);
             },
             

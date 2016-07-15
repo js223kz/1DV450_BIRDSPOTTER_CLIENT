@@ -36,7 +36,7 @@
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
-                        let auth = JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+                        let auth = ApiService.getUser();
                         let bird = {
                             name: scope.birdName,
                             latin: scope.latinName,

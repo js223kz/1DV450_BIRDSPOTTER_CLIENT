@@ -58,6 +58,7 @@ module.exports = function(app) {
     app.delete('/spots/:id', (req, res) => {
         let auth = req.headers.authorization
         let id = req.params.id;
+        console.log("server id" + id);
         spots.deleteSpot(auth, id)
             .then((response) => {
             res.send(response);
