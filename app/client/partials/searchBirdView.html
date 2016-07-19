@@ -1,0 +1,18 @@
+<!-- Searchbar --> 
+<form name="addSpotForm" class="simple-form" data-ng-submit="saveSpot()" required>
+
+    <div class="bar">
+        <input class="form-control" type="text" data-ng-model="query" data-ng-change="updateSearchValue()" placeholder="Sök fågel">
+    </div>
+    <button>Spara</button>
+</form>
+
+ <!-- SearchResult --> 
+<div data-ng-show="showSearchResult" class="search-results">                
+    <ul class="birds" ng-repeat="bird in birdList | filter: query | orderBy: 'birdName' ">
+        <li>
+            {{bird.birdName}} 
+            <button data-ng-click="addBirdToSpot(bird)">Lägg till</button>
+        </li>
+    </ul>
+</div>

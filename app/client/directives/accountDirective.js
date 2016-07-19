@@ -23,7 +23,6 @@
                 });
                 
                 scope.deleteSpot = ((spotId)=>{
-                    console.log(spotId);
                     ApiService.deleteSpot(spotId, scope.user)
                     .then(scope.spotDeletedMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))
