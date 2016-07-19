@@ -23,13 +23,15 @@
                 }
                 
                 scope.updateSearchValue = function(){
-                    //scope.birds = scope.birdList;
+                    //if one spot is successfully saved
+                    //hide success message when user wants 
+                    //to add a new spot
+                    scope.success = "";
+                    
                     if(scope.query.length > 0){
                         scope.showSearchResult = true;
-                        console.log("longer");
                     }else{
                        scope.showSearchResult = false;
-                        console.log("shorter");
                     }
                 }
                
@@ -39,19 +41,25 @@
                 
                 //opens a new form to add a new bird to list
                 scope.addNewBirdToList = function(){
-                    scope.showAddSpot= false;
-                    scope.showAddBird = true;
+                    scope.showAddSpotView = false;
+                    scope.showAddBirdView = true;
                     scope.query = "";
+                    scope.success = "";
                 }
                 
-                scope.successMessage = ((message)=>{
-                    scope.selectedBirds = [];
+                scope.spotSavedMessage = ((message)=>{
                     scope.success = message;
+                    
                 });
+                scope.resetSpotForm = (()=>{
+                    scope.selectedBirds = [];
+                    scope.query = null;
+                });
+
                 
                 scope.saveSpot = (()=>{
                     let birds = [];
-                    let auth = JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+                    let auth = ApiService.getUser();
                     let errorMessage = 'Du måste godkänna att vi får använda din position.'+
                         'Utan den går det inte att registrera en ny birdspot.'
                     
@@ -81,19 +89,21 @@
                         }
                         
                         ApiService.saveItem(spot, auth.token, Constants.SPOTS_URL)
-                        .then(scope.successMessage)
+                        .then(scope.spotSavedMessage)
+                        .then(scope.resetSpotForm)
+                        .then(scope.updateList(Constants.SPOTS_URL))
+                        
+                        //error message function in parent directive
                         .catch(scope.errorMessage);
-                        }
-
+                    }
                 });
 
-                scope.closeAddSpotView = function(){
-                    scope.selectedBirds = [];
-                    scope.query = null;
-                    scope.showAddSpot = false;
-                }
-                
-           },
+                scope.closeAddSpotView = (()=>{
+                    scope.resetSpotForm();
+                    scope.showAddSpotView = false;
+                });
+                   
+            }
         }
      }
     
