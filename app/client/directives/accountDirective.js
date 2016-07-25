@@ -10,9 +10,12 @@
             restrict: 'E',
             templateUrl: 'partials/accountView.html',
             require: '^myParentDirective',
+         
             link: function(scope, elem, attrs){
-                scope.user = ApiService.getUser();
                 scope.success = null;
+                scope.showEditSpotPanel = false;
+               
+                scope.user = ApiService.getUser();
                 
                 scope.closeAccountPanel = (()=>{
                     scope.showAccountView = false;
@@ -31,6 +34,11 @@
                 
                 scope.spotDeletedMessage = ((message)=>{
                     scope.success = message;
+                });
+                
+                scope.editSpot = ((spot)=>{
+                    scope.selectedSpot = spot;
+                    scope.showEditSpotPanel = true;
                 });
                 
                    

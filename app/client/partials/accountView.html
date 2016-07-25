@@ -9,7 +9,8 @@
             
             <!-- user spots list --> 
         
-            <div>                
+            <div>
+                <edit-spot data-ng-show="showEditSpotPanel"></edit-spot>
                 <ul ng-repeat="spot in spotList | filter:{birdspotterId: user.id}">
                     <li>
                         {{spot.id}} {{spot.createdAt}} 
@@ -19,7 +20,7 @@
                         </li>
                         </ul>
                     </li>
-                    <button data-ng-click="editSpot(spot.id)">Ändra</button>
+                    <button data-ng-click="editSpot(spot)">Ändra</button>
                     <button data-ng-click="deleteSpot(spot.id)">Radera</button>
                 </ul>
             </div>    

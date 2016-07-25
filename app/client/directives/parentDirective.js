@@ -9,12 +9,13 @@
       return {
             restrict: 'E',
             scope: true,
-            priority: 1000,
+            priority: 2000,
             controller: (($scope)=>{
                 $scope.showLoginView = false;
                 $scope.showAddSpotView = false;
                 $scope.showAddBirdView = false;
                 $scope.showAccountView = false;
+                $scope.selectedSpot = null;
                 
                 $scope.userPosition = null;
                 $scope.birdList =  null;

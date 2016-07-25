@@ -33,6 +33,7 @@
                     
                 });
                 scope.resetSpotForm = (()=>{
+                    scope.success = null;
                     scope.selectedBirds = [];
                     scope.query = null;
                 });

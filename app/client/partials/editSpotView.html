@@ -1,0 +1,9 @@
+<div id="edit-spot-wrapper">
+    <h1>Edit Spot</h1>
+    <ul>
+        <li ng-repeat="bird in selectedSpot.birds">
+            {{bird.birdName}} 
+            <button data-ng-click="deleteBird($index)">Radera</button>
+        </li>
+    </ul>
+</div>
