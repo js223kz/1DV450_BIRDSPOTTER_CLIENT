@@ -37,6 +37,11 @@
                 });
                 
                 scope.editSpot = ((spot)=>{
+                    
+                    spot.birds.forEach((bird)=>{
+                        scope.selectedBirds.push({name: bird.birdName, id: bird.id});
+                    });
+                    
                     scope.selectedSpot = spot;
                     scope.showEditSpotPanel = true;
                 });

@@ -16,6 +16,7 @@
                 $scope.showAddBirdView = false;
                 $scope.showAccountView = false;
                 $scope.selectedSpot = null;
+                $scope.selectedBirds = [];
                 
                 $scope.userPosition = null;
                 $scope.birdList =  null;

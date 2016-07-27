@@ -1,9 +1,13 @@
 <div id="edit-spot-wrapper">
-    <h1>Edit Spot</h1>
+    <button>Spara ändringar</button>
+    <button data-ng-click="closeEditSpotPanel()">Stäng</button>
     <ul>
-        <li ng-repeat="bird in selectedSpot.birds">
-            {{bird.birdName}} 
+        {{selectedSpot.id}}
+        <li ng-repeat="bird in selectedBirds">
+            {{bird.name}} 
             <button data-ng-click="deleteBird($index)">Radera</button>
         </li>
     </ul>
+    <button data-ng-show="!showAddNewBirdPanel" data-ng-click="addNewBird()">Lägg till fågel</button>
+    <search-bird data-ng-show="showAddNewBirdPanel"></search-bird>
 </div>

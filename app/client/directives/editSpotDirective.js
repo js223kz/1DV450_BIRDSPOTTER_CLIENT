@@ -11,9 +11,22 @@
             templateUrl: 'partials/editSpotView.html',
             require: '^myParentDirective',
             link: function(scope, elem, attrs){
-                 scope.deleteBird = ((bird)=>{
+        
+                scope.showAddNewBirdPanel = false;
+                
+                scope.deleteBird = ((bird)=>{
                      scope.selectedSpot.birds.splice(bird, 1);
                  });
+                
+                scope.addNewBird = (()=>{
+                    scope.showAddNewBirdPanel = true;
+                });
+                
+                scope.closeEditSpotPanel = (()=>{
+                    scope.selectedBirds = [];
+                    scope.showAddNewBirdPanel = false;
+                    scope.showEditSpotPanel = false;
+                });
             }
         }
      }

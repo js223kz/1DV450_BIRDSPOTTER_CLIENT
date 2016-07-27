@@ -13,7 +13,6 @@
             link: function(scope, elem, attrs){
                 scope.query = null;
                 scope.showSearchResult = false;
-                scope.selectedBirds = [];
                 
                 scope.success = null;
                 let userPosition = undefined;
