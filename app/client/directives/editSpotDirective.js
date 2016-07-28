@@ -28,13 +28,8 @@
                     scope.showEditSpotPanel = false;
                 });
                 
-               /* scope.spotEditedMessage = ((message)=>{
-                    return scope.success = message;
-                });*/
-                
                 scope.saveChanges = (()=>{
                     let birds = [];
-                    let id = scope.selectedSpot.id;
                     
                     //get id:s of selected birds
                     scope.selectedBirds.forEach((bird)=>{
@@ -42,9 +37,7 @@
                     });
                     
                     scope.selectedSpot.birds = birds.toString();  
-                    
-                    console.log("efter" + scope.selectedSpot.birds);
-                    
+                                        
                     ApiService.editSpot(scope.selectedSpot)
                     .then(scope.successMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))
