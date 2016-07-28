@@ -14,8 +14,8 @@
         
                 scope.showAddNewBirdPanel = false;
                 
-                scope.deleteBird = ((bird)=>{
-                     scope.selectedSpot.birds.splice(bird, 1);
+                scope.deleteBird = ((birdIndex)=>{
+                     scope.selectedBirds.splice(birdIndex, 1);
                  });
                 
                 scope.addNewBird = (()=>{
@@ -26,6 +26,31 @@
                     scope.selectedBirds = [];
                     scope.showAddNewBirdPanel = false;
                     scope.showEditSpotPanel = false;
+                });
+                
+               /* scope.spotEditedMessage = ((message)=>{
+                    return scope.success = message;
+                });*/
+                
+                scope.saveChanges = (()=>{
+                    let birds = [];
+                    let id = scope.selectedSpot.id;
+                    
+                    //get id:s of selected birds
+                    scope.selectedBirds.forEach((bird)=>{
+                        birds.push(bird.id);
+                    });
+                    
+                    scope.selectedSpot.birds = birds.toString();  
+                    
+                    console.log("efter" + scope.selectedSpot.birds);
+                    
+                    ApiService.editSpot(scope.selectedSpot)
+                    .then(scope.successMessage)
+                    .then(scope.updateList(Constants.SPOTS_URL))
+                    .then(scope.closeEditSpotPanel)
+                    .catch(scope.errorMessage);
+                   
                 });
             }
         }

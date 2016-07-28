@@ -1,6 +1,8 @@
 <div id="edit-spot-wrapper">
-    <button>Spara ändringar</button>
+    <button data-ng-click="saveChanges()">Spara ändringar</button>
     <button data-ng-click="closeEditSpotPanel()">Stäng</button>
+    <span>{{success}}</span>
+    <span>{{error}}</span>
     <ul>
         {{selectedSpot.id}}
         <li ng-repeat="bird in selectedBirds">

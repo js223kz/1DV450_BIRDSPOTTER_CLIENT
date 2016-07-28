@@ -27,14 +27,14 @@
                 
                 scope.deleteSpot = ((spotId)=>{
                     ApiService.deleteSpot(spotId, scope.user)
-                    .then(scope.spotDeletedMessage)
+                    .then(scope.successMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))
                     .catch(scope.errorMessage);
                 });
                 
-                scope.spotDeletedMessage = ((message)=>{
-                    scope.success = message;
-                });
+                /*scope.spotDeletedMessage = ((message)=>{
+                    return scope.success = message;
+                });*/
                 
                 scope.editSpot = ((spot)=>{
                     

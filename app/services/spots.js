@@ -59,8 +59,15 @@ module.exports = {
     updateSpot(auth, spot, id){
         return new Promise((resolve, reject) => {
             request({
-                url: url + path + '/' + id + apikey,
+                url: url + path + '/' + id,
                 method: 'PUT',
+                qs: {
+                    latitude: spot.latitude,
+                    longitude: spot.longitude,
+                    bird: spot.birds,
+                    key: apikey,
+                    
+                },
                 headers : {
                     "Authorization" :'Token token='+auth,
                     "Content-Type": 'application/json'
@@ -70,8 +77,9 @@ module.exports = {
             }, (error, response, body) =>{
                
                 let res = JSON.parse(body);
+                console.log(res);
                  
-                if(body.status !== 200){
+                if(res.status !== 200){
                    reject(res);
                 }
                 resolve(res);

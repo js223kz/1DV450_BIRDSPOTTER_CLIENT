@@ -43,8 +43,10 @@ module.exports = function(app) {
     
     app.put('/spots/:id', (req, res) => {
          let auth = req.headers.authorization;
-         let spot = req.body.spot;
+         let spot = req.body.object;
          let id = req.params.id;
+        
+        console.log(auth + spot + id);
          
          spots.updateSpot(auth, spot, id).then((response) => {
             res.send(response);
@@ -58,7 +60,6 @@ module.exports = function(app) {
     app.delete('/spots/:id', (req, res) => {
         let auth = req.headers.authorization
         let id = req.params.id;
-        console.log("server id" + id);
         spots.deleteSpot(auth, id)
             .then((response) => {
             res.send(response);

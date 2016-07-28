@@ -57,6 +57,10 @@
                 $scope.errorMessage = ((error)=>{
                     return $scope.error = error;
                 });
+                
+                $scope.successMessage = ((success)=>{
+                    return $scope.success = success;
+                });
 
 
                 $scope.setUserPosition = ((position)=>{

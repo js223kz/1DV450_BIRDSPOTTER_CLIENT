@@ -27,10 +27,10 @@
                     scope.success = "";
                 }
                 
-                scope.spotSavedMessage = ((message)=>{
+                /*scope.spotSavedMessage = ((message)=>{
                     scope.success = message;
                     
-                });
+                });*/
                 scope.resetSpotForm = (()=>{
                     scope.success = null;
                     scope.selectedBirds = [];
@@ -70,7 +70,7 @@
                         }
                         
                         ApiService.saveItem(spot, auth.token, Constants.SPOTS_URL)
-                        .then(scope.spotSavedMessage)
+                        .then(scope.successMessage)
                         .then(scope.resetSpotForm)
                         .then(scope.updateList(Constants.SPOTS_URL))
                         
