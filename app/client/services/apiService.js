@@ -61,6 +61,23 @@
 
             },
             
+            editSpot: function(spot){
+                let user = this.getUser();
+                return $http({
+                method: 'PUT',
+                url: Constants.SPOTS_URL + '/' + spot.id,
+                headers: {
+                    "Authorization" : user.token,
+                    "Content-Type": 'application/json'
+                },
+                data: { object: spot }
+                })
+                .then(this.responseSuccess)
+                .catch(this.responseError);
+                
+            },
+            
+            
             deleteSpot: function(spotId, user){
                 
                 return $http({
@@ -76,6 +93,7 @@
             },
             
             responseError: function(error){
+                console.log(error.data);
                 return $q.reject(error.data);
             },
             

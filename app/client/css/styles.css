@@ -6,3 +6,13 @@
 [ng\:cloak],[ng-cloak],.ng-cloak{
     display:none !important
 }
+
+#edit-spot-wrapper{
+    border: 1px solid black;
+    height: auto;
+}
+
+#map{
+    height: 800px;
+    width: 300px;
+}

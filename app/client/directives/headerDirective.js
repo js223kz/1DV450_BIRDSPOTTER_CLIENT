@@ -22,6 +22,7 @@
                 });
 
                 scope.showAddSpotPanel = (()=>{
+                    scope.showAccountView = false;
                     PositionService.getUserPosition()
                     
                         //functions in parent directive
@@ -30,6 +31,7 @@
                 });
                                     
                 scope.showAccountPanel = (()=>{
+                    scope.showAddSpotView = false;
                     scope.showAccountView = true;
                 });
             }

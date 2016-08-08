@@ -44,7 +44,7 @@
                         }
                                                 
                        ApiService.saveItem(bird, auth.token, Constants.BIRDS_URL)
-                        .then(scope.birdSavedMessage)
+                        .then(scope.successMessage)
                         .then(scope.resetBirdForm)
                         .then(scope.updateList(Constants.BIRDS_URL))
                        
@@ -54,9 +54,9 @@
                     }
                 });
                 
-                scope.birdSavedMessage = ((message)=>{
+               /* scope.birdSavedMessage = ((message)=>{
                     scope.success = message;
-                });
+                });*/
                 
                 
             },

@@ -10,9 +10,12 @@
             restrict: 'E',
             templateUrl: 'partials/accountView.html',
             require: '^myParentDirective',
+         
             link: function(scope, elem, attrs){
-                scope.user = ApiService.getUser();
                 scope.success = null;
+                scope.showEditSpotPanel = false;
+               
+                scope.user = ApiService.getUser();
                 
                 scope.closeAccountPanel = (()=>{
                     scope.showAccountView = false;
@@ -23,15 +26,24 @@
                 });
                 
                 scope.deleteSpot = ((spotId)=>{
-                    console.log(spotId);
                     ApiService.deleteSpot(spotId, scope.user)
-                    .then(scope.spotDeletedMessage)
+                    .then(scope.successMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))
                     .catch(scope.errorMessage);
                 });
                 
-                scope.spotDeletedMessage = ((message)=>{
-                    scope.success = message;
+                /*scope.spotDeletedMessage = ((message)=>{
+                    return scope.success = message;
+                });*/
+                
+                scope.editSpot = ((spot)=>{
+                    
+                    spot.birds.forEach((bird)=>{
+                        scope.selectedBirds.push({name: bird.birdName, id: bird.id});
+                    });
+                    
+                    scope.selectedSpot = spot;
+                    scope.showEditSpotPanel = true;
                 });
                 
                    

@@ -13,31 +13,11 @@
             link: function(scope, elem, attrs){
                 scope.query = null;
                 scope.showSearchResult = false;
-                scope.selectedBirds = [];
                 
                 scope.success = null;
                 let userPosition = undefined;
                 
-                scope.regex = function(value){
-                     return '/^' + value + '/';
-                }
-                
-                scope.updateSearchValue = function(){
-                    //if one spot is successfully saved
-                    //hide success message when user wants 
-                    //to add a new spot
-                    scope.success = "";
-                    
-                    if(scope.query.length > 0){
-                        scope.showSearchResult = true;
-                    }else{
-                       scope.showSearchResult = false;
-                    }
-                }
                
-                scope.addBirdToSpot = function(bird){
-                    scope.selectedBirds.push({name: bird.birdName, id: bird.id});
-                }
                 
                 //opens a new form to add a new bird to list
                 scope.addNewBirdToList = function(){
@@ -47,11 +27,12 @@
                     scope.success = "";
                 }
                 
-                scope.spotSavedMessage = ((message)=>{
+                /*scope.spotSavedMessage = ((message)=>{
                     scope.success = message;
                     
-                });
+                });*/
                 scope.resetSpotForm = (()=>{
+                    scope.success = null;
                     scope.selectedBirds = [];
                     scope.query = null;
                 });
@@ -89,7 +70,7 @@
                         }
                         
                         ApiService.saveItem(spot, auth.token, Constants.SPOTS_URL)
-                        .then(scope.spotSavedMessage)
+                        .then(scope.successMessage)
                         .then(scope.resetSpotForm)
                         .then(scope.updateList(Constants.SPOTS_URL))
                         

@@ -9,12 +9,14 @@
       return {
             restrict: 'E',
             scope: true,
-            priority: 1000,
+            priority: 2000,
             controller: (($scope)=>{
                 $scope.showLoginView = false;
                 $scope.showAddSpotView = false;
                 $scope.showAddBirdView = false;
                 $scope.showAccountView = false;
+                $scope.selectedSpot = null;
+                $scope.selectedBirds = [];
                 
                 $scope.userPosition = null;
                 $scope.birdList =  null;
@@ -54,6 +56,10 @@
                 
                 $scope.errorMessage = ((error)=>{
                     return $scope.error = error;
+                });
+                
+                $scope.successMessage = ((success)=>{
+                    return $scope.success = success;
                 });
 
 
