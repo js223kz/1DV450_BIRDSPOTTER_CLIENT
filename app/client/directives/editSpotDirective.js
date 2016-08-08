@@ -29,15 +29,16 @@
                 });
                 
                 scope.saveChanges = (()=>{
-                    let birds = [];
+                    scope.selectedSpot.birds = [];
                     
                     //get id:s of selected birds
                     scope.selectedBirds.forEach((bird)=>{
-                        birds.push(bird.id);
+                        scope.selectedSpot.birds.push(bird.id);
                     });
                     
-                    scope.selectedSpot.birds = birds.toString();  
-                                        
+                    scope.selectedSpot.birds = scope.selectedSpot.birds.toString();  
+                    
+                    
                     ApiService.editSpot(scope.selectedSpot)
                     .then(scope.successMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))

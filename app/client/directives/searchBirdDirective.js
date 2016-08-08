@@ -29,7 +29,6 @@
                 }
                 
                 scope.birdExists = ((id)=>{
-                    console.log(id);
                     return scope.selectedBirds.some((bird)=>{
                         return bird.id === id;
                     })
@@ -37,12 +36,9 @@
                
                 scope.addBirdToSpot = function(bird){
                     if(scope.birdExists(bird.id)){
-                         console.log("finns redan");
                         scope.errorMessage("Fågeln är redan registrerad i din spot");
                     }else{
                         scope.selectedBirds.push({name: bird.birdName, id: bird.id});
-                        console.log("finns inte");
-                       
                     }
                         
                         
