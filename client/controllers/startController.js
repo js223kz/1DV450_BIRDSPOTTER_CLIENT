@@ -11,27 +11,30 @@
         $scope.error = null;
         $scope.loggedIn = LoginService.getUser();
         $scope.showLoginView = false;
-                
+        
+        console.log($scope.loggedIn);
+        
         //set lat and long + zoom for map
         $scope.map = L.map('map').setView([60, 17], 5);
                  L.tileLayer(Constants.TRAFFICLAYER, {
                         attribution: Constants.ATTRIBUTION
                 }).addTo($scope.map);
         
+        let collections =  [
+                            ApiService.getCollection(Constants.SPOTS_URL),  
+                            ApiService.getCollection(Constants.BIRDS_URL)
+                        ];
         
-        ApiService.getCollection(Constants.SPOTS_URL)
-            .then( ApiService.getCollection(Constants.BIRDS_URL))
-            .then(ApiService.getCachedList(Constants.SPOTS_URL))
-            .then($scope.setAllmarkers)
-            .catch((error)=>{
+        $q.all(collections)
+            .then(()=>{
+                $scope.birdSpots = ApiService.getCachedList(Constants.SPOTS_URL); 
+                $scope.birds = ApiService.getCachedList(Constants.BIRDS_URL);
+                let markers = LayerService.showAllMarkers($scope.birdSpots);
+                $scope.map.addLayer(markers);
+                
+            }).catch((error)=>{
                 $scope.error = error;
-        });
-                           
-        $scope.setAllmarkers = ((spots)=>{
-            let markers = LayerService.showAllMarkers(spots);
-            $scope.map.addLayer(markers);
-        });
+        })
         
      }   
 })();
-  
