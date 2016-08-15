@@ -1,15 +1,14 @@
-<div class="col-md-4" data-ng-show="showLoginView">
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">Logga in</h3>
+        <h3 class="panel-title">Logga in</h3>
         <button data-ng-click="closeLogin()" class="btn btn-primary">Stäng</button>
     </div>
-    <p>{{error}}</p>
-      
-    <!-- Loginformulär --> 
+        <p>{{error}}</p>
+
+        <!-- Loginformulär --> 
     <div class="panel-body">
         <form name="loginForm" class="simple-form" data-ng-submit="login(email, password)" required>
-        
+
             <!-- E-post -->     
             <input type="email"  name="userEmail" data-ng-model="email" placeholder="E-post" required/><br />
             <div data-ng-messages="loginForm.userEmail.$error" data-ng-if="loginForm.userEmail.$dirty">
@@ -26,7 +25,6 @@
 
             <!-- Submit --> 
             <button>Logga in</button>
-       </form>
+        </form>
     </div>
- </div>
 </div>

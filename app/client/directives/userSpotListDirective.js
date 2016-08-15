@@ -3,38 +3,31 @@
 (function(){
     angular.module('BirdSpotterApp').directive('myAccount', myAccount)
     
-    myAccount.$inject = ['Constants', 'ApiService']
+    myAccount.$inject = ['Constants', 'ApiService', '$location']
     
-    function myAccount(Constants, ApiService){
+    function myAccount(Constants, ApiService, $location){
         return{
             restrict: 'E',
-            templateUrl: 'partials/accountView.html',
-            require: '^myParentDirective',
-         
+            templateUrl: 'views/partials/userSpotList.html',         
             link: function(scope, elem, attrs){
-                scope.success = null;
                 scope.showEditSpotPanel = false;
-               
-                scope.user = ApiService.getUser();
+                
                 
                 scope.closeAccountPanel = (()=>{
-                    scope.showAccountView = false;
+                     $location.path('/');
                 });
                 
-                scope.userSpots = ((spot)=>{
+                /*scope.userSpots = ((spot)=>{
                     return (spot.birdspotterid === scope.user.id);
-                });
+                });*/
                 
+               
                 scope.deleteSpot = ((spotId)=>{
                     ApiService.deleteSpot(spotId, scope.user)
                     .then(scope.successMessage)
                     .then(scope.updateList(Constants.SPOTS_URL))
                     .catch(scope.errorMessage);
                 });
-                
-                /*scope.spotDeletedMessage = ((message)=>{
-                    return scope.success = message;
-                });*/
                 
                 scope.editSpot = ((spot)=>{
                     

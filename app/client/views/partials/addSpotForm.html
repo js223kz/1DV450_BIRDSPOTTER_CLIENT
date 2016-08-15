@@ -1,0 +1,25 @@
+ <!-- Add new spot form --> 
+<div class="panel panel-primary" data-ng-cloak>
+    <div class="panel-heading">
+        <h3 class="panel-title">Lägg till en ny birdspot</h3>
+        <button class="btn btn-primary" data-ng-click="closeAddSpotView()">Stäng</button>
+    </div>
+    <p>{{error}}</p>
+    <p>{{success}}</p>
+    <div class="panel-body">
+
+        <!-- selected birds list --> 
+        <div>                
+            <ul ng-repeat="bird in selectedBirds">
+                <li>
+                    {{bird.name}} 
+                </li>
+            </ul>
+        </div>
+        <search-bird></search-bird>
+        <form name="addSpotForm" class="simple-form" data-ng-submit="saveSpot()" required>
+            <button>Spara</button>
+        </form>
+
+    </div> 
+</div>    

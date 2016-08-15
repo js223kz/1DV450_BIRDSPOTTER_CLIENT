@@ -8,27 +8,26 @@
     function myLogin(Constants, LoginService){
         return {
         restrict: 'E',
-        require: '^myParentDirective',
-        templateUrl: 'partials/loginView.html',
+        templateUrl: 'views/partials/loginForm.html',
         link: function(scope) {
             
-            scope.closeLogin = function(){
-              scope.showLoginView = false;
-            };
+            scope.closeLogin = (()=>{
+                scope.showLoginView = false;
+            });
             
-            scope.login = function(email, pwd){
+            scope.login = ((email, pwd)=>{
                 LoginService.tryToLogin(email, pwd)
                     .then(scope.successfullLogin)
                     .catch(scope.errorMessage);
-            };
+            });
             
-            scope.successfullLogin = function(){
-                scope.loggedIn = true;
+            scope.successfullLogin = (()=>{
+                scope.loggedIn = LoginService.getUser();
                 scope.closeLogin();
-            }
+            });
         }
       }
-     }
+    }
     
 })();
 
