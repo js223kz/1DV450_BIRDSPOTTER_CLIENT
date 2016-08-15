@@ -1,0 +1,19 @@
+{
+  "name": "birdspotter",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Johanna Szepanski"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/js223kz/1DV450_BIRDSPOTTER_CLIENT",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
