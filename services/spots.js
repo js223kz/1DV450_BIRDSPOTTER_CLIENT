@@ -1,10 +1,10 @@
 "use strict";
-//require('dotenv').config();
+require('dotenv').config();
 const request = require('request'),
       fs = require('fs');
-      //path =  process.env.API_SPOTS_PATH,
-      //apikey = process.env.API_KEY,
-      //url = process.env.API_URL;
+      path =  process.env.API_SPOTS_PATH,
+      apikey = process.env.API_KEY,
+      url = process.env.API_URL;
 
 
 module.exports = {

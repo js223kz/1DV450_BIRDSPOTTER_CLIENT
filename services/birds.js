@@ -1,11 +1,10 @@
 "use strict";
-//require('dotenv').config();
+require('dotenv').config();
 const   request = require('request'),
         fs = require('fs'),
-        path =  'birds',
-        apikey = '164b564282b60d8f6ef2661d5ad1bb10cbcbbf0dbe093a351de04f4ce4c927b1',
-        url = 'https://birdspotterdev.herokuapp.com/api/v1/';
-
+        path =  process.env.API_SPOTS_PATH,
+        apikey = process.env.API_KEY,
+        url = process.env.API_URL;
 
 
 module.exports = {
