@@ -2,7 +2,7 @@
   "name": "birdspotter",
   "version": "1.0.0",
   "description": "",
-  "main": "app/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha test/**/*test.js",
     "start": "node server.js"
