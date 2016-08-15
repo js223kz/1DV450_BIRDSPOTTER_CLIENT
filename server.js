@@ -8,7 +8,7 @@ let express  = require('express'),
     schedule = require('node-schedule'),
     birdsService = require('./services/birds'),
     spotsService = require('./services/spots'),
-    port = process.env.PORT || 3000;
+    port = process.env.PORT || 8080;
 
 
 // configuration =================
@@ -25,4 +25,4 @@ require('./routes.js')(app);
 
 // listen (start app with node server.js) ======================================
 server.listen(port);
-console.log("App listening on port 3000");
+console.log("App listening on port 8080");
