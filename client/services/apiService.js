@@ -36,13 +36,17 @@
             
             getCachedList: function(storage){
                 let list = null;
+                let deferred = $q.defer();
                  if(storage === Constants.BIRDS_STORAGE){
-                        list = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                    list = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
+                    $q.resolve(list);
+                        
                         
                 }else{
-                        list = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
+                    list = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
+                    $q.resolve(list);
                 }
-                 return list;
+                 return deferred.Promise;
             },
             
             saveItem: function(object, token, url){
