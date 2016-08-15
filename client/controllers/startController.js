@@ -11,9 +11,7 @@
         $scope.error = null;
         $scope.loggedIn = LoginService.getUser();
         $scope.showLoginView = false;
-        
-        console.log($scope.loggedIn);
-        
+                
         //set lat and long + zoom for map
         $scope.map = L.map('map').setView([60, 17], 5);
                  L.tileLayer(Constants.TRAFFICLAYER, {
