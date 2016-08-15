@@ -67,16 +67,15 @@
                         $scope.userPosition = position;
                         $scope.showAddSpotView = true;
                 });
-                }), 
-                link: function(scope,elem,attr){
-                    pre:{
-                        scope.updateList(Constants.BIRDS_URL);
-                        scope.updateList(Constants.SPOTS_URL);
-                    }
-                }
-               
+         }),
+          link: {
+              pre: function(scope,elem,attr){
+                  
+                  scope.updateList(Constants.BIRDS_URL);
+                  scope.updateList(Constants.SPOTS_URL);
+            }
+        }
     }
 }
     
 })();
-

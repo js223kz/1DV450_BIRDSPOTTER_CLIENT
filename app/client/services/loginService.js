@@ -39,6 +39,10 @@
                 sessionStorage.removeItem(Constants.USER_STORAGE);
             },
             
+            getUser: function(){
+                return JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+            }
+            
             
         }
     }      

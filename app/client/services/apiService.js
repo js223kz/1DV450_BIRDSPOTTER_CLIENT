@@ -24,7 +24,6 @@
             
                 if(response.data.hasOwnProperty('birds')){
                     collection = JSON.stringify(response.data.birds);
-                    console.log("save birds collection");
                     sessionStorage.setItem(Constants.BIRDS_STORAGE, collection);
                     deferred.resolve();
                 }else{
@@ -35,15 +34,15 @@
                 return deferred.Promise;
             },
             
-            getList: function(url){
+            getCachedList: function(storage){
                 let list = null;
-                 if(url === Constants.BIRDS_URL){
+                 if(storage === Constants.BIRDS_STORAGE){
                         list = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
-                        return $q.resolve(list);
+                        
                 }else{
                         list = JSON.parse(sessionStorage.getItem(Constants.SPOTS_STORAGE));
-                        return $q.resolve(list);
                 }
+                 return list;
             },
             
             saveItem: function(object, token, url){
@@ -61,8 +60,7 @@
 
             },
             
-            editSpot: function(spot){
-                let user = this.getUser();
+            editSpot: function(spot, user){
                 return $http({
                 method: 'PUT',
                 url: Constants.SPOTS_URL + '/' + spot.id,
@@ -93,19 +91,14 @@
             },
             
             responseError: function(error){
-                console.log(error.data);
-                return $q.reject(error.data);
+                return error.data;
             },
             
             responseSuccess: function(response){
-                console.log(response.data.message);
-                return $q.resolve(response.data.message);
-            },
-            
-            //user saved in loginService.js
-            getUser: function(){
-                return JSON.parse(sessionStorage.getItem(Constants.USER_STORAGE));
+                return response.data.message;
             }
+            
+            
         }
     }      
 })();

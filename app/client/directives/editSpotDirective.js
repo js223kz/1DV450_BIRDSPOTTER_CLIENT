@@ -8,8 +8,7 @@
     function editSpot(Constants, ApiService){
         return{
             restrict: 'E',
-            templateUrl: 'partials/editSpotView.html',
-            require: '^myParentDirective',
+            templateUrl: 'views/partials/editSpotForm.html',
             link: function(scope, elem, attrs){
         
                 scope.showAddNewBirdPanel = false;
@@ -19,10 +18,10 @@
                  });
                 
                 scope.addNewBird = (()=>{
-                    scope.showAddNewBirdPanel = true;
+                    scope.showAddNewBirdForm = true;
                 });
                 
-                scope.closeEditSpotPanel = (()=>{
+                scope.closeEditSpotForm = (()=>{
                     scope.selectedBirds = [];
                     scope.showAddNewBirdPanel = false;
                     scope.showEditSpotPanel = false;
@@ -30,6 +29,10 @@
                 
                 scope.saveChanges = (()=>{
                     scope.selectedSpot.birds = [];
+                    if(scope.selectedBirds.length === 0){
+                        scope.errorMessage("Din spot måste innehålla minst en fågel.");
+                        return;
+                    }
                     
                     //get id:s of selected birds
                     scope.selectedBirds.forEach((bird)=>{
@@ -39,11 +42,11 @@
                     scope.selectedSpot.birds = scope.selectedSpot.birds.toString();  
                     
                     
-                    ApiService.editSpot(scope.selectedSpot)
-                    .then(scope.successMessage)
-                    .then(scope.updateList(Constants.SPOTS_URL))
-                    .then(scope.closeEditSpotPanel)
-                    .catch(scope.errorMessage);
+                    ApiService.editSpot(scope.selectedSpot, scope.user)
+                        .then(scope.successMessage)
+                        .then(scope.updateList(Constants.SPOTS_URL))
+                        .then(scope.closeEditSpotForm)
+                        .catch(scope.errorMessage);
                    
                 });
             }

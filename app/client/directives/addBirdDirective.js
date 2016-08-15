@@ -3,18 +3,15 @@
 (function(){
     angular.module('BirdSpotterApp').directive('myAddBird', myAddBird)
     
-    myAddBird.$inject = ['Constants', 'ApiService']
+    myAddBird.$inject = ['Constants', 'ApiService', 'LoginService']
     
-    function myAddBird(Constants, ApiService){
+    function myAddBird(Constants, ApiService, LoginService){
         return{
             restrict: 'E',
-            templateUrl: 'partials/addBirdView.html',
+            templateUrl: 'views/partials/addBirdForm.html',
             link: function(scope, elem, attrs){
                 scope.regularities = Constants.REGULARITIES;
                 scope.regularityNotValid = false;
-                scope.success = null;
-                scope.error = scope.errorMessage;
-                
                 
                 scope.resetBirdForm = (()=>{
                     scope.birdName = "";
@@ -24,19 +21,20 @@
                 });
 
                 
-                scope.closeAddBirdView = (() =>{
-                    scope.showAddSpotView = true;
-                    scope.showAddBirdView = false;
+                scope.closeAddBirdForm = (() =>{
+                    scope.showAddBirdForm = false;
                     scope.success = "";
                     scope.resetBirdForm();
                 });
          
+                
+                
                 scope.saveBird = (() =>{
                     
                     if(scope.regularity === null){
                         scope.regularityNotValid = true;
                     }else{
-                        let auth = ApiService.getUser();
+                        let auth = LoginService.getUser();
                         let bird = {
                             name: scope.birdName,
                             latin: scope.latinName,
@@ -52,13 +50,7 @@
                         //error message function in parent directive
                         .catch(scope.errorMessage);
                     }
-                });
-                
-               /* scope.birdSavedMessage = ((message)=>{
-                    scope.success = message;
-                });*/
-                
-                
+                });    
             },
         }
      }

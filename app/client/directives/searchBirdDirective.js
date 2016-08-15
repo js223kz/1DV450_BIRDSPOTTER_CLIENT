@@ -8,12 +8,12 @@
     function searchBird(Constants, ApiService){
         return{
             restrict: 'E',
-            templateUrl: 'partials/searchBirdView.html',
-            require: '^myParentDirective',
+            templateUrl: 'views/partials/searchBirdView.html',
             link: function(scope, elem, attrs){
-                 scope.regex = function(value){
+                                
+                /*scope.regex = function(value){
                      return '/^' + value + '/';
-                }
+                }*/
                 
                 scope.updateSearchValue = function(){
                     //if one spot is successfully saved
@@ -38,6 +38,7 @@
                     if(scope.birdExists(bird.id)){
                         scope.errorMessage("Fågeln är redan registrerad i din spot");
                     }else{
+                        scope.errorMessage("");
                         scope.selectedBirds.push({name: bird.birdName, id: bird.id});
                     }
                         

@@ -12,7 +12,6 @@
             showAllMarkers: function(birdSpots){
                 let markers = [];
                 birdSpots.forEach((item) =>{
-                    console.log(item);
                    let marker = MarkerService.createMarker(item);
                        markers.push(marker);
                 });

@@ -3,33 +3,33 @@
 (function(){
     angular.module('BirdSpotterApp').directive('myHeader', myHeader)
     
-    myHeader.$inject = ['LoginService', 'PositionService', '$location']
+    myHeader.$inject = ['LoginService', '$location']
     
-    function myHeader(LoginService, PositionService, $location){
+    function myHeader(LoginService, $location){
         return {
             restrict: 'E',
-            templateUrl: 'partials/headerView.html',
-            require: '^myParentDirective',
+            templateUrl: 'views/partials/headerView.html',
             link: function(scope) {
+                
+                scope.showLoginView = null;
 
-                scope.showLoginPanel = (()=>{
+                scope.goToLogin = (()=>{
                     scope.showLoginView = true;
+                });
+                
+                scope.goToAccount = (()=>{
+                    $location.path('/account');
                 });
                                    
                 scope.logout = (()=>{
                     LoginService.logout();
                     scope.loggedIn = false;
                 });
-
-                scope.showAddSpotPanel = (()=>{
-                    scope.showAccountView = false;
-                    PositionService.getUserPosition()
-                    
-                        //functions in parent directive
-                        .then(scope.setUserPosition)
-                        .catch(scope.errorMessage);
+                
+                scope.goToAddSpot = (()=>{
+                    $location.path('/addSpot');
                 });
-                                    
+               
                 scope.showAccountPanel = (()=>{
                     scope.showAddSpotView = false;
                     scope.showAccountView = true;

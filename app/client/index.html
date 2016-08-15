@@ -25,16 +25,8 @@
     <![endif]-->
 </head>
 <body>
-    
-    <!-- Partials -->
-    <my-parent-directive>
-        <my-header></my-header>
-        <my-login></my-login>
-        <my-add-spot></my-add-spot>
-        <my-add-bird class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" data-ng-show="showAddBirdView"></my-add-bird>
-        <my-account></my-account>
-        <my-map></my-map>
-    </my-parent-directive>
+     <ng-view class="viewcontainer"></ng-view>
+ 
     
     <!-- CDN --> 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
@@ -42,6 +34,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    
+    <!-- Modules --> 
     <script src="/bower_components/angular-messages/angular-messages.js"></script>
     <script src="/bower_components/angular-base64/angular-base64.js"></script>
     <script src="/bower_components/ngGeolocation/ngGeolocation.min.js"></script>
@@ -49,25 +43,22 @@
     
     <!-- Application resources -->
     <script src="/app.js"></script>
+    <script src="controllers/startController.js"></script>
+    <script src="controllers/addSpotController.js"></script>
+    <script src="controllers/accountController.js"></script>
     <script src="services/positionService.js"></script>
     <script src="services/constantService.js"></script>
     <script src="services/apiService.js"></script>
     <script src="services/loginService.js"></script>
     <script src="services/mapMarkerService.js"></script>
     <script src="services/mapLayerService.js"></script>
-    <script src="directives/parentDirective.js"></script>
     <script src="directives/headerDirective.js"></script>
     <script src="directives/loginDirective.js"></script>
     <script src="directives/addSpotDirective.js"></script>
     <script src="directives/addBirdDirective.js"></script>
-    <script src="directives/accountDirective.js"></script>
+    <script src="directives/userSpotListDirective.js"></script>
     <script src="directives/searchBirdDirective.js"></script>
     <script src="directives/editSpotDirective.js"></script>
-    <script src="directives/mapDirective.js"></script>
-
-    
-   
-    
 
 </body>
 </html>
