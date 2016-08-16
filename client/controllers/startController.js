@@ -24,6 +24,14 @@
                             ApiService.getCollection(Constants.BIRDS_URL)
                         ];
         
+        $scope.errorMessage = ((error)=>{
+            return $scope.error = error;
+        });
+                
+        $scope.successMessage = ((success)=>{
+            return $scope.success = success;
+        });
+        
         $scope.setMarkers = ((list)=>{
             let markers = LayerService.showAllMarkers(list);
             $scope.map.addLayer(markers);

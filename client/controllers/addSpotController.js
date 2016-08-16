@@ -29,11 +29,11 @@
         
         $scope.setList = ((url)=>{
             if(url === Constants.BIRDS_URL){
-                let collection = ApiService.getCachedList(Constants.BIRDS_STORAGE);
+                let collection = ApiService.getCachedList(Constants.BIRDS_URL);
                 $scope.birdList = collection;
             
             }else{
-                let collection = ApiService.getCachedList(Constants.SPOTS_STORAGE);
+                let collection = ApiService.getCachedList(Constants.SPOTS_URL);
                 $scope.spotList = collection;
             }
         });
@@ -54,9 +54,6 @@
 
         });
     
-        
-        
-        
         PositionService.getUserPosition()
                     
             //functions in parent directive
