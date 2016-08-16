@@ -16,3 +16,18 @@
     height: 800px;
     width: 300px;
 }
+#map_selection_wrapper{
+    border: 1px solid blue;
+}
+
+#only_users_wrapper{
+    display: inline-block;
+}
+
+#only_users_checkbox{
+    float: left;
+}
+#only_users_checkbox_text{
+    max-width:auto;
+    float: left;
+}

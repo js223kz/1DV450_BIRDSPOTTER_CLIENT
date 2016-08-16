@@ -21,6 +21,8 @@
             saveCollection: function(response){
                 let collection = undefined;
                 let deferred = $q.defer();
+                
+                console.log(response.data);
             
                 if(response.data.hasOwnProperty('birds')){
                     collection = JSON.stringify(response.data.birds);
@@ -34,9 +36,9 @@
                 return deferred.Promise;
             },
             
-            getCachedList: function(storage){
+            getCachedList: function(url){
                 let list = null;
-                 if(storage === Constants.BIRDS_STORAGE){
+                 if(url === Constants.BIRDS_URL){
                         list = JSON.parse(sessionStorage.getItem(Constants.BIRDS_STORAGE));
                         
                 }else{
