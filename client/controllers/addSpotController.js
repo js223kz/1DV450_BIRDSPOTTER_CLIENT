@@ -8,7 +8,7 @@
     function AddSpotController(ApiService, Constants, PositionService, $scope){
         
         //shared variables between directives
-        $scope.birdList = ApiService.getCachedList(Constants.BIRDS_STORAGE);
+        $scope.birdList = ApiService.getCachedList(Constants.BIRDS_URL);
         $scope.showAddBirdForm = null;
         $scope.showSearchResult = false;
         $scope.selectedBirds = [];
