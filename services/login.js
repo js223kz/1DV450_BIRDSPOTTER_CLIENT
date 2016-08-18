@@ -18,6 +18,7 @@ module.exports = {
                 let res = JSON.parse(body);
                 
                 if(res.status !== 200){
+                    console.log(res);
                     reject(res);
                 }
                 resolve(body);

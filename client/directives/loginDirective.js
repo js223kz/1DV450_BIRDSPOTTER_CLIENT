@@ -3,18 +3,23 @@
 (function(){
     angular.module('BirdSpotterApp').directive('myLogin', myLogin)
     
-    myLogin.$inject = ['Constants', 'LoginService']
+    myLogin.$inject = ['Constants', 'LoginService', '$location']
     
-    function myLogin(Constants, LoginService){
+    function myLogin(Constants, LoginService, $location){
         return {
         restrict: 'E',
         templateUrl: 'views/partials/loginForm.html',
         link: function(scope) {
             
             scope.closeLogin = (()=>{
-                scope.showLoginView = false;
+               $location.path('/');
             });
-            
+            scope.error = null;
+        
+            scope.errorMessage = ((error)=>{
+                return scope.error = error;
+            });
+
             scope.login = ((email, pwd)=>{
                 LoginService.tryToLogin(email, pwd)
                     .then(scope.successfullLogin)
@@ -22,8 +27,7 @@
             });
             
             scope.successfullLogin = (()=>{
-                scope.loggedIn = LoginService.getUser();
-                scope.closeLogin();
+                $location.path('/');
             });
         }
       }

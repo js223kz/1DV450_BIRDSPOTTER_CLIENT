@@ -11,6 +11,7 @@
             SPOTS_URL: '/spots',
             BIRDS_URL: '/birds',
             LOGIN_URL: '/login/',
+            POSITION_URL: 'spots/position',
             
             //Seessionstorage
             BIRDS_STORAGE: 'birds',

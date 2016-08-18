@@ -40,6 +40,8 @@
                     }else{
                         scope.errorMessage("");
                         scope.selectedBirds.push({name: bird.birdName, id: bird.id});
+                        scope.showSearchResult = false;
+                        scope.query = "";
                     }
                         
                         

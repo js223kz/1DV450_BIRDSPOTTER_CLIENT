@@ -1,8 +1,10 @@
 <header>
-    <button data-ng-if="!showLoginView" data-ng-hide="loggedIn" ng-cloak data-ng-click="goToLogin()">Logga in</button>
-    <button data-ng-if="!showLoginView" data-ng-show="loggedIn" ng-cloak data-ng-click="logout()">Logga ut</button>
-    <button data-ng-show="loggedIn" data-ng-click="goToAddSpot()">Lägg till en spot</button>
-    <button data-ng-show="loggedIn" data-ng-click="goToAccount()">Konto</button>
+    <div class="header_btn_wrapper">
+        <button class="text_button" data-ng-if="!showLoginView" data-ng-hide="loggedIn" ng-cloak data-ng-click="goToLogin()">Logga in</button>
+        <button class="text_button" data-ng-if="!showLoginView" data-ng-show="loggedIn" ng-cloak data-ng-click="logout()">Logga ut</button>
+        <button class="text_button" data-ng-show="loggedIn" data-ng-click="goToAddSpot()">Lägg till en spot</button>
+        <button class="text_button" data-ng-show="loggedIn" data-ng-click="goToAccount()">Konto</button>
+    </div>
 </header>
     
     

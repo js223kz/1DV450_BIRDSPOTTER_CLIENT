@@ -16,11 +16,6 @@
                 scope.closeAccountPanel = (()=>{
                      $location.path('/');
                 });
-                
-                /*scope.userSpots = ((spot)=>{
-                    return (spot.birdspotterid === scope.user.id);
-                });*/
-                
                
                 scope.deleteSpot = ((spotId)=>{
                     ApiService.deleteSpot(spotId, scope.user)

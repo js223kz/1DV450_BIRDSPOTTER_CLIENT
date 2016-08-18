@@ -18,12 +18,22 @@
                 .catch(this.responseError);
             },
             
+            getSpotsByDistance: function(object){
+                var deferred = $q.defer();
+                return $http({
+                    method: 'GET',
+                    url: Constants.POSITION_URL,
+                    headers: {},
+                    params: {lat: object.latitude, lng: object.longitude, offset: object.offset}
+                })
+                .then(this.returnData)
+                .catch(this.responseError);
+            },
+            
             saveCollection: function(response){
                 let collection = undefined;
                 let deferred = $q.defer();
-                
-                console.log(response.data);
-            
+                            
                 if(response.data.hasOwnProperty('birds')){
                     collection = JSON.stringify(response.data.birds);
                     sessionStorage.setItem(Constants.BIRDS_STORAGE, collection);
@@ -92,7 +102,12 @@
             .catch(this.responseError);
             },
             
+            returnData: function(response){
+                return response.data;
+            },
+            
             responseError: function(error){
+                console.log("error" + error.data);
                 return error.data;
             },
             

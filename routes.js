@@ -17,10 +17,19 @@ module.exports = function(app) {
     
     // spots -------------------------------------------------------------
     app.get('/spots', (req, res) => {
-        
         spots.getSpots()
             .then((response) =>{
             console.log("getSpots");
+                res.send(response);
+            }).catch((err) =>{
+                res.status(err.status).send(err.message);
+        });  
+    });
+    
+    app.get('/spots/position', (req, res) => {
+       spots.getSpotsByDistance(req.query)
+            .then((response) =>{
+            console.log("getSpotsBydistance");
                 res.send(response);
             }).catch((err) =>{
                 res.status(err.status).send(err.message);

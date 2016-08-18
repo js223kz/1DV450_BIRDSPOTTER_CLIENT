@@ -9,19 +9,20 @@ BirdSpotterApp.config(['$routeProvider', '$locationProvider',
         when('/', {
             templateUrl: 'views/startView.html',
             controller: 'StartController'
-      }).
+        }).
+        when('/login', {
+                templateUrl: 'views/loginView.html',
+                controller: 'LoginController'
+        }).
         when('/addSpot', {
             templateUrl: 'views/addSpotView.html',
             controller: 'AddSpotController'
-      }).
+        }).
         when('/account', {
             templateUrl: 'views/accountView.html',
             controller: 'AccountController'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
-      
-      //pretty url:s without hashtag
-      //$locationProvider.html5Mode(true);
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
 }]);

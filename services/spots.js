@@ -2,16 +2,17 @@
 require('dotenv').config();
 const request = require('request'),
       fs = require('fs'),
-      path =  process.env.API_SPOTS_PATH,
+      spotPath =  process.env.API_SPOTS_PATH,
+      positionPath = process.env.API_POSITION_PATH,
       apikey = process.env.API_KEY,
       url = process.env.API_URL;
 
 
 module.exports = {
-    getSpots(){             
+    getSpots(){ 
         return new Promise((resolve, reject) =>{
             request({
-                url: url + path,
+                url: url + spotPath,
                 method: 'GET',
                 qs:{
                     key: apikey
@@ -26,12 +27,35 @@ module.exports = {
             });
         });
     },
-
     
+    getSpotsByDistance(distance){
+        console.log(distance.lat)
+         return new Promise((resolve, reject) =>{
+            request({
+                url: url + positionPath,
+                method: 'GET',
+                qs:{
+                    key: apikey,
+                    lat: distance.lat,
+                    lng: distance.lng,
+                    offset: distance.offset
+                }
+            }, (error, response, body) =>{
+                let res = JSON.parse(body);
+                console.log(res);
+                
+                if(res.status !== 200){
+                    reject(res);
+                }
+                resolve(body);
+            });
+        });
+    },
+
     createSpot(auth, spot){
         return new Promise((resolve, reject) => {
             let req = request({
-                url: url + path,
+                url: url + spotPath,
                 method: 'POST',
                 qs: {
                     latitude: spot.latitude,
@@ -59,7 +83,7 @@ module.exports = {
     updateSpot(auth, spot, id){
         return new Promise((resolve, reject) => {
             request({
-                url: url + path + '/' + id,
+                url: url + spotPath + '/' + id,
                 method: 'PUT',
                 qs: {
                     latitude: spot.latitude,
@@ -90,7 +114,7 @@ module.exports = {
     deleteSpot(auth, id){
         return new Promise((resolve, reject) => {
             request({
-                url: url + path + "/" + id,
+                url: url + spotPath + "/" + id,
                 method: 'DELETE',
                 qs: {
                     key: apikey

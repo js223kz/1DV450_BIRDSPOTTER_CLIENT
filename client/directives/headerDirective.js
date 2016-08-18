@@ -14,7 +14,7 @@
                 scope.showLoginView = null;
 
                 scope.goToLogin = (()=>{
-                    scope.showLoginView = true;
+                    $location.path('/login');
                 });
                 
                 scope.goToAccount = (()=>{
