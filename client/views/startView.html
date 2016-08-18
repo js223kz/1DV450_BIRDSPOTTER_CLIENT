@@ -7,7 +7,7 @@
     <div data-ng-show="error" class="alert alert-danger">
         {{error}}
     </div>
-    <form name="mapSelectionForm" class="simple-form" data-ng-submit="showSelectedMapMarkers(usersOnly, offset)">
+    <form name="mapSelectionForm" class="simple-form">
         <div id="only_users_wrapper" data-ng-show="loggedIn">
             <p class="input_text">Visa bara mina:</p>
             <input class="form-control form_input" id="only_users_checkbox" type="checkbox" ng-model="usersOnly" value="user" />
@@ -25,7 +25,7 @@
             </ul>
         </div>
         <search-bird></search-bird>
-        <button class="btn action_btn form_input" type="submit" value="Submit">Sök</button>
+        <button class="btn action_btn form_input" data-ng-click="filterMapQuery(usersOnly, offset)">Sök</button>
         <button class="btn action_btn form_input" type="reset" data-ng-click="reset()">Rensa</button>
         
     </form> 
