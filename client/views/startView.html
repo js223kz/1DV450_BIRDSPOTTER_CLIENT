@@ -1,18 +1,33 @@
  <!-- Partials -->
-{{error}}
-<my-login class="col-md-4" data-ng-show="showLoginView"></my-login>
 <my-header></my-header>
-<div id="map_selection_wrapper">
-    <form class="simple-form" data-ng-submit="showSelectedMapMarkers(usersOnly, distance)">
-        <div id="only_users_wrapper">
-            <p id="only_users_checkbox_text" data-ng-show="loggedIn">Endast mina: </p>
-            <input id="only_users_checkbox" type="checkbox" data-ng-show="loggedIn" ng-model="usersOnly" value="user" />
+<div id="logo_wrapper" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <img src="css/images/Birdspotter_logo.png" id="logo">
+</div>
+<div id="map_selection_wrapper" class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div data-ng-show="error" class="alert alert-danger">
+        {{error}}
+    </div>
+    <form name="mapSelectionForm" class="simple-form" data-ng-submit="showSelectedMapMarkers(usersOnly, offset)">
+        <div id="only_users_wrapper" data-ng-show="loggedIn">
+            <p class="input_text">Visa bara mina:</p>
+            <input class="form-control form_input" id="only_users_checkbox" type="checkbox" ng-model="usersOnly" value="user" />
         </div>
         <div>
-            Avstånd: <input type="text" ng-model="distance" placeholder="Avstånd i hela km"/> km
+            <p class="input_text">Avstånd från min nuvarande position:</p>
+            <input id="distance" class="form-control form_input" type="text" ng-model="offset" placeholder="Avstånd i hela km"/>
+        </div>
+        <p class="input_text">Begränsa fåglar:</p>
+        <div>                
+            <ul ng-repeat="bird in selectedBirds">
+                <li class="input_text">
+                    {{bird.name}} 
+                </li>
+            </ul>
         </div>
         <search-bird></search-bird>
-      <input type="submit" value="Submit">
+        <button class="btn action_btn form_input" type="submit" value="Submit">Sök</button>
+        <button class="btn action_btn form_input" type="reset" data-ng-click="reset()">Rensa</button>
+        
     </form> 
 </div>
 <div id="map"></div>
