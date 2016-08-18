@@ -23,7 +23,9 @@
                 return $http({
                     method: 'GET',
                     url: Constants.POSITION_URL,
-                    headers: {},
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
                     params: {lat: object.latitude, lng: object.longitude, offset: object.offset}
                 })
                 .then(this.returnData)
@@ -103,7 +105,7 @@
             },
             
             returnData: function(response){
-                return response.data;
+                return response.data.spots;       
             },
             
             responseError: function(error){

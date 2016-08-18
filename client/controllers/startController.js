@@ -3,9 +3,9 @@
 (function(){
     angular.module('BirdSpotterApp').controller('StartController', StartController)
     
-    StartController.$inject = ['ApiService', 'Constants', 'LayerService', 'LoginService', 'PositionService', '$scope', '$q']
+    StartController.$inject = ['ApiService', 'Constants', 'LayerService', 'LoginService', 'PositionService', 'MarkerService', '$scope', '$q']
     
-    function StartController(ApiService, Constants, LayerService, LoginService, PositionService, $scope, $q){
+    function StartController(ApiService, Constants, LayerService, LoginService, PositionService, MarkerService, $scope, $q){
         $scope.spotList = null;
         $scope.birdList = null;
         $scope.error = null;
@@ -40,13 +40,15 @@
             let markers = LayerService.showAllMarkers(list);
             $scope.map.addLayer(markers);
         });
-       
+        
         $scope.filterByUserId = ((spot)=>{
             return (spot.birdspotterId === $scope.loggedIn.id);
         });
         
-        $scope.checkSpotUnique = (()=>{
-            
+        $scope.isInArray = ((needle, hayStack)=>{
+            hayStack.filter(function(spot){ 
+                return spot.id === needle;
+            });
         });
         
         $scope.filterByBirds = ((result)=>{
@@ -57,7 +59,10 @@
                     for(let k=0; k < $scope.selectedBirds.length; k++){
                         
                         if(result[i].birds[j].birdName === $scope.selectedBirds[k].name){
-                            matches.push(result[i]);
+                            if(!$scope.isInArray(result[i].id, matches)){
+                                 matches.push(result[i]);
+                            }
+                           
                         }
                     }         
                 }
@@ -65,7 +70,7 @@
             return matches;
         });
         
-        $scope.showSelectedMapMarkers = ((usersOnly, offset)=>{
+        $scope.filterMapQuery = ((usersOnly, offset)=>{
             let result = $scope.spotList;
             if(offset !== undefined){
                 //check if valid integer
@@ -89,20 +94,24 @@
                         longitude: $scope.userPosition.lng,
                         offset: $scope.offset
                     };
-                    result = ApiService.getSpotsByDistance(nearBy);
+                    ApiService.getSpotsByDistance(nearBy)
+                    .then((response)=>{
+                        result = response;
+                    });
                     
-                    console.log(result.spots);
                 }
              }
             
             if(usersOnly){
                 result = result.filter($scope.filterByUserId);
+                console.log(result);
             }
             
             if($scope.selectedBirds.length > 0){
                 result = $scope.filterByBirds(result);
-                console.log("result" + result.length);
             }
+            $scope.setMarkers(result);
+            
         });
         
         //on application start get user position

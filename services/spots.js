@@ -29,7 +29,6 @@ module.exports = {
     },
     
     getSpotsByDistance(distance){
-        console.log(distance.lat)
          return new Promise((resolve, reject) =>{
             request({
                 url: url + positionPath,
@@ -42,12 +41,11 @@ module.exports = {
                 }
             }, (error, response, body) =>{
                 let res = JSON.parse(body);
-                console.log(res);
                 
                 if(res.status !== 200){
                     reject(res);
                 }
-                resolve(body);
+                resolve(res);
             });
         });
     },
