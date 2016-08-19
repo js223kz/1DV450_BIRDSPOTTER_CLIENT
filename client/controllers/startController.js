@@ -15,7 +15,7 @@
         $scope.userPosition = null;
             
         //set lat and long + zoom for map
-        $scope.map = L.map('map').setView([60, 17], 5);
+        $scope.map = L.map('map').setView([63, 20], 5);
                  L.tileLayer(Constants.TRAFFICLAYER, {
                         attribution: Constants.ATTRIBUTION
                 }).addTo($scope.map);

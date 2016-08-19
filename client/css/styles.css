@@ -83,6 +83,7 @@ header{
 }
 .input_text {
    font-family: 'Lato', sans-serif;
+    width: auto;
 }
 
 
@@ -109,14 +110,7 @@ header{
     float: left;
 }
 
-/*map*/
-#map{
-    height: 800px;
-    width: 100%;
-}
-
 /*edit spot*/
-
 .delete_btn{
     background: none;
     border: none;
@@ -126,9 +120,13 @@ header{
     margin-left: 10px;
 }
 
+/*map*/
 #map{
     height: 800px;
-    width: 300px;
+    max-width: 100%;
+    border-radius: 5px;
+    border: 1px solid firebrick;
+    margin-top: 10px;
 }
 #map_selection_wrapper{
     border: 1px solid firebrick;
