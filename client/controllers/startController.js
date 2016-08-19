@@ -13,10 +13,11 @@
         $scope.showLoginView = false;
         $scope.selectedBirds = [];
         $scope.userPosition = null;
+        $scope.mapMarkers = null;
             
         //set lat and long + zoom for map
         $scope.map = L.map('map').setView([63, 20], 5);
-                 L.tileLayer(Constants.TRAFFICLAYER, {
+                 L.tileLayer(Constants.MAPLAYER, {
                         attribution: Constants.ATTRIBUTION
                 }).addTo($scope.map);
         
@@ -34,11 +35,12 @@
         
         $scope.reset = (()=>{
             $scope.selectedBirds = [];
+            $scope.errorMessage("");
         });
         
         $scope.setMarkers = ((list)=>{
-            let markers = LayerService.showAllMarkers(list);
-            $scope.map.addLayer(markers);
+            $scope.mapMarkers = LayerService.showAllMarkers(list);
+            $scope.map.addLayer($scope.mapMarkers);
         });
         
         $scope.filterByUserId = ((spot)=>{
@@ -71,7 +73,8 @@
         });
         
         $scope.filterMapQuery = ((usersOnly, offset)=>{
-            let result = $scope.spotList;
+             let result = $scope.spotList;
+             $scope.map.removeLayer($scope.mapMarkers);
             if(offset !== undefined){
                 //check if valid integer
                 if(offset.match(/^\d+$/)){
@@ -104,13 +107,18 @@
             
             if(usersOnly){
                 result = result.filter($scope.filterByUserId);
-                console.log(result);
             }
             
             if($scope.selectedBirds.length > 0){
                 result = $scope.filterByBirds(result);
             }
-            $scope.setMarkers(result);
+            if(result.length === 0){
+                $scope.errorMessage("Sökningen gav inga resultat.")
+            }else{
+                $scope.setMarkers(result);
+            }
+           
+            
             
         });
         

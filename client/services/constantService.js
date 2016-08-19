@@ -4,7 +4,7 @@
         .constant('Constants', {
         
             //map
-            TRAFFICLAYER: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            MAPLAYER: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             ATTRIBUTION: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             
             //Api-urls

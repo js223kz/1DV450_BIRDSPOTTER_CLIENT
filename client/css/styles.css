@@ -67,6 +67,7 @@ header{
     background-color: firebrick;
 
 }
+
 .alert {
     font-family: 'Lato', sans-serif;
     margin-top: 10px;
@@ -81,11 +82,11 @@ header{
 .form_input{
     margin-bottom: 5px;
 }
+
 .input_text {
    font-family: 'Lato', sans-serif;
     width: auto;
 }
-
 
 .login_form{
     position: relative;

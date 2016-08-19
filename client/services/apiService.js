@@ -105,6 +105,7 @@
             },
             
             returnData: function(response){
+                console.log(response.data.spots.length);
                 return response.data.spots;       
             },
             
