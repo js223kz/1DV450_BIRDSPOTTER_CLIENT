@@ -3,6 +3,8 @@ Ett Ruby on Rails/Angular projekt
 
 En applikation där fågelskådare kan registrera fågelobservationer på en position och visa registrerade upptäckter av fåglar på en karta över Sverige. Applikationen är ett pågående använder REST-API:et https://github.com/js223kz/1DV450_BIRDSPOTTER_JS223KZ
 
+**Applikationen är optimerad för desktop i Firefox**
+
 #### Del 3 skapa klient som använder tidigare byggt REST-API
 
 **Publicerad applikation:**</br>
