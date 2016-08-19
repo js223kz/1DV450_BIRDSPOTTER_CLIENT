@@ -8,7 +8,7 @@
     function AccountController($scope, ApiService, Constants, LoginService){
         $scope.user = LoginService.getUser();
         $scope.spots = ApiService.getCachedList(Constants.SPOTS_STORAGE);
-        $scope.birdList = ApiService.getCachedList(Constants.BIRDS_STORAGE);
+        $scope.birdList = ApiService.getCachedList(Constants.BIRDS_URL);
         $scope.selectedBirds = [];
         $scope.success = null;
         $scope.error = null;
