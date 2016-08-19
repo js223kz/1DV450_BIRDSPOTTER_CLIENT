@@ -27,8 +27,6 @@
                     scope.resetBirdForm();
                 });
          
-                
-                
                 scope.saveBird = (() =>{
                     
                     if(scope.regularity === null){

@@ -1,27 +1,34 @@
-<section class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-    <div class="panel panel-primary" data-ng-cloak>
-        <div class="panel-heading">
-            <h3 class="panel-title">Konto {{user.username}}</h3>
-            <button class="btn btn-primary" data-ng-click="closeAccountPanel()">Stäng</button>
-        </div>
-        <div class="panel-body">
-            <span>{{success}}</span>
-            
-            <!-- user spots list --> 
-        
-            <div>
-                <edit-spot data-ng-show="showEditSpotPanel"></edit-spot>
-                <div data-ng-repeat="spot in spots | filter:{birdspotterId: user.id}">
-                    {{spot.id}} {{spot.createdAt}} 
-                       <ul>
-                         <li ng-repeat="bird in spot.birds"> 
-                           {{bird.birdName}} 
-                         </li>
-                       </ul> 
-                    <button data-ng-click="editSpot(spot)">Ändra</button>
-                    <button data-ng-click="deleteSpot(spot.id)">Radera</button>
-                </div>
-            </div>
+<div class="form_wrapper" class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    
+    <!-- Panel header-->
+    <div class="form_header panel-heading">
+        <h4 class="form_title">Konto {{user.username}}</h4>
+        <button data-ng-click="closeAccountPanel()" class="close_btn">X</button>
+    </div>
+    
+    <!-- Error message -->
+    <div data-ng-show="error" class="alert alert-danger">
+        {{error}}
+    </div>
+    
+     <!-- Success message -->
+    <div data-ng-show="success" class="alert alert-success">
+        {{success}}
+    </div>
+
+    <!-- Spot list  --> 
+    <div class="panel-body">
+        <edit-spot data-ng-show="showEditSpotPanel"></edit-spot>
+        <div class="account_list_row" data-ng-repeat="spot in spots | filter:{birdspotterId: user.id}">
+            {{spot.id}} {{spot.createdAt}} 
+               <ul ng-repeat="bird in spot.birds">
+                 <li> 
+                   {{bird.birdName}} 
+                 </li>
+               </ul> 
+            <button class="action_btn btn" data-ng-click="editSpot(spot)">Ändra</button>
+            <button class="action_btn btn" data-ng-click="deleteSpot(spot.id)">Radera</button>
         </div>
     </div>
-</section>
+</div>
+
