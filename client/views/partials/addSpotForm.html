@@ -1,25 +1,36 @@
- <!-- Add new spot form --> 
-<div class="panel panel-primary" data-ng-cloak>
-    <div class="panel-heading">
-        <h3 class="panel-title">Lägg till en ny birdspot</h3>
-        <button class="btn btn-primary" data-ng-click="closeAddSpotView()">Stäng</button>
+<div class="form_wrapper" data-ng-hide="showAddBirdForm" class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    
+    <!-- Panel header-->
+    <div class="form_header panel-heading">
+        <h4 class="form_title">Registrera en birdspot</h4>
+        <button class="btn panel_heading_btn" data-ng-click="goToAddBird()">Lägg till fågel som inte finns i listan</button>
+        <button data-ng-click="closeAddSpotView()" class="close_btn">X</button>
     </div>
-    <p>{{error}}</p>
-    <p>{{success}}</p>
+
+    
+    <!-- Error message -->
+    <div data-ng-show="error" class="alert alert-danger">
+        {{error}}
+    </div>
+    
+    <!-- Success message -->
+    <div data-ng-show="success" class="alert alert-success">
+        {{success}}
+    </div>
+
+    <!-- add spot form --> 
     <div class="panel-body">
-
-        <!-- selected birds list --> 
-        <div>                
-            <ul ng-repeat="bird in selectedBirds">
-                <li>
-                    {{bird.name}} 
-                </li>
-            </ul>
-        </div>
-        <search-bird></search-bird>
-        <form name="addSpotForm" class="simple-form" data-ng-submit="saveSpot()" required>
-            <button>Spara</button>
+        <form name="addSpotForm" class="simple-form" required>
+            <!-- selected birds list --> 
+            <div>                
+                <ul ng-repeat="bird in selectedBirds">
+                    <li>
+                        {{bird.name}} 
+                    </li>
+                </ul>
+            </div>
+            <search-bird></search-bird>
+            <button class="btn action_btn" data-ng-click="saveSpot()">Spara</button>
         </form>
-
-    </div> 
-</div>    
+    </div>
+</div>

@@ -38,6 +38,14 @@ header{
 .form_title{
     color: white;
     font-family: 'Lato', sans-serif;
+    width: auto;
+    
+}
+
+.panel_heading_btn{
+    background: none;
+    border: 1px solid white;
+    color: white
     
 }
 
@@ -83,7 +91,7 @@ header{
 }
 
 /*login*/
-.login_wrapper{
+.form_wrapper{
     border: 1px solid firebrick;
     border-radius: 5px;
     margin-top: 20px;
@@ -133,4 +141,14 @@ header{
 #only_users_checkbox_text{
     max-width:auto;
     float: left;
+}
+
+
+/*Marker popup*/
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip{
+     background: lightgray;
+}
+.popup_title{
+    font-weight: 600;
 }

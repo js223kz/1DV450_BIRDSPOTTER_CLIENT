@@ -16,16 +16,11 @@
         $scope.success = null;
         $scope.error = null;
         $scope.userPosition = null;
-        
+        $scope.userPosition === null
         
         $scope.setUserPosition = ((position)=>{
             $scope.userPosition = position;
         });
-        
-        $scope.goToAddBird = (()=>{
-            $scope.showAddBirdForm = true;
-            $scope.query = "";
-        }); 
         
         $scope.setList = ((url)=>{
             if(url === Constants.BIRDS_URL){

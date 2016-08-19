@@ -3,22 +3,15 @@
 (function(){
     angular.module('BirdSpotterApp').factory('MarkerService', MarkerService)
     
-    MarkerService.$inject = ['Constants', '$q', '$http']
+    MarkerService.$inject = ['Constants', '$q', '$http', '$filter']
     
-    function MarkerService(Constants, $q, $http){
+    function MarkerService(Constants, $q, $http, $filter){
         
         return{
             createMarker: function(item){
-                let marker = L.marker([item.latitude, item.longitude]);
+                let popupInfo = this.setPopupInfo(item),
+                    marker = L.marker([item.latitude, item.longitude]).bindPopup(popupInfo);
                 return marker;
-            },
-            
-            //show popup depending on user choice
-            showPopup: function(clickedItem){
-                let latLng = [clickedItem.latitude, clickedItem.longitude],
-                    popupInfo = this.setPopupInfo(clickedItem),
-                    popup = L.popup().setContent(popupInfo).setLatLng(latLng);
-                    return popup;       
             },
             
             setIcon: function(){
@@ -30,19 +23,23 @@
             },
             
             setPopupInfo: function(item){
-                /*let date = new Date(item.createddate),
+               let  date = new Date(item.createdAt),
                     formattedDate = $filter('date')(date, 'yyyy-MM-dd hh:mm'),
-                    category = setCategory(item.category),
-                    description =  item.description,
-                    title = item.title,
-                    exactlocation = item.exactlocation;
+                    latitude = item.latitude,
+                    longitude =  item.longitude,
+                    birds = item.birds,
+                    htmlString = '';
 
-
-                return '<p class="popup_title">' + title + ' ' + 
-                    exactlocation + '</p><p class="popup_description">' +
-                    '<p class= "date">Skapad: ' + formattedDate + '</p>' +
-                    '<p class= "category">Kategori: ' + category + 
-                    '</p>' + description +'</p>';*/
+                htmlString += '<p class="popup_title">' + 'Skapad: ' + formattedDate + '<br>' + 
+                    'Latitud: ' + latitude + '<br>' + 'Longitud: ' + longitude + '</p>' + 
+                    '<ul class="popup_birds"' 
+                
+                item.birds.forEach((bird)=>{
+                    htmlString += '<li>' + bird.birdName + '</li>'
+                });
+                
+                htmlString += '</ul>';
+                return htmlString;
             }
             
             

@@ -11,13 +11,16 @@
             templateUrl: 'views/partials/addSpotForm.html',
             link: function(scope, elem, attrs){
                 
+                scope.goToAddBird = (()=>{
+                    scope.showAddBirdForm = true;
+                    scope.query = "";
+                }); 
                 
                 scope.resetSpotForm = (()=>{
                     scope.selectedBirds = [];
                     scope.query = null;
                 });
 
-                
                 scope.saveSpot = (()=>{
                     let birds = [];
                     let auth = LoginService.getUser();
