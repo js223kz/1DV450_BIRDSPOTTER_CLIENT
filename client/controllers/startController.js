@@ -33,11 +33,13 @@
             return $scope.success = success;
         });
         
+        //reset search form
         $scope.reset = (()=>{
             $scope.selectedBirds = [];
             $scope.errorMessage("");
         });
         
+        //set map markers
         $scope.setMarkers = ((list)=>{
             $scope.mapMarkers = LayerService.showAllMarkers(list);
             $scope.map.addLayer($scope.mapMarkers);
@@ -117,9 +119,6 @@
             }else{
                 $scope.setMarkers(result);
             }
-           
-            
-            
         });
         
         //on application start get user position

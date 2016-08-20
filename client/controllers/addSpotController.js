@@ -22,6 +22,7 @@
             $scope.userPosition = position;
         });
         
+        //methods used in child directives
         $scope.setList = ((url)=>{
             if(url === Constants.BIRDS_URL){
                 let collection = ApiService.getCachedList(Constants.BIRDS_URL);
@@ -32,6 +33,7 @@
                 $scope.spotList = collection;
             }
         });
+        
         $scope.errorMessage = ((error)=>{
             return $scope.error = error;
         });
@@ -49,6 +51,7 @@
 
         });
     
+        //initialized when controller is in scope
         PositionService.getUserPosition()
                     
             //functions in parent directive

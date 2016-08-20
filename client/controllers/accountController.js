@@ -14,6 +14,7 @@
         $scope.error = null;
         
         
+        //methods used in directives
          $scope.setList = (()=>{
             return $scope.spots = ApiService.getCachedList(Constants.SPOTS_STORAGE);
          });
