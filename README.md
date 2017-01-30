@@ -7,16 +7,6 @@ En applikation där fågelskådare kan registrera fågelobservationer på en pos
 
 #### Del 3 skapa klient som använder tidigare byggt REST-API
 
-**Publicerad applikation:**</br>
-https://birdspotter-client.herokuapp.com
-
-**FInloggning för att testa applikationen**</br>
-användarnamn: info@marcus.se</br>
-lösenord: hallojsa</br>
-
-användarnamn: info@superkatten.se</br>
-lösenord: superkatten</br>
-
 #### Använda klienten
 
 **Kort beskrivning:**</br>
